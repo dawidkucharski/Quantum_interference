@@ -1,0 +1,2 @@
+scenario,step_nm,rms_nm,lambda_class_nm,lambda1_nm,lambda2_nm,lambda_eff_um,phase_step_sigma_deg,background_drift_frac,amplitude_drift_frac,normalize_frames,hybrid_smooth_sigma_px,recon
+sc01,0.0,80.0,532.0,810.0,809.0,655.2899999999507,0.0,0.0,0.0,0,1.5,psi4

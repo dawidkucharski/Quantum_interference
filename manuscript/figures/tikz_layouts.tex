@@ -1,0 +1,181 @@
+% TikZ optical layout schematics (not to scale)
+\begin{tikzpicture}[x=0.95cm,y=0.95cm, font=\small, >=Stealth]
+  \tikzset{
+    beam/.style={line width=0.9pt},
+    midarrow/.style={
+      decoration={markings,
+      mark=at position 0.55 with {\arrow{Stealth[length=2.2mm,width=1.6mm]}}},
+      postaction={decorate}
+    },
+    fwd/.style={beam,midarrow},
+    ret/.style={beam,densely dashed,midarrow},
+    comp/.style={draw,fill=gray!12,rounded corners=1pt},
+    detector/.style={draw,fill=gray!10,rounded corners=1pt,
+                     minimum width=11mm,minimum height=6mm},
+    label/.style={font=\scriptsize,fill=white,inner sep=1pt}
+  }
+
+  % ---- Beamsplitter ----
+  \newcommand{\BSplate}[2]{%
+    \begin{scope}
+      \coordinate (bs@c) at #1;
+      \draw[fill=gray!18,fill opacity=0.35,draw]
+        ([shift={(-0.22,-0.22)}]bs@c) rectangle
+        ([shift={(0.22,0.22)}]bs@c);
+      \draw[line width=0.8pt]
+        ([shift={(-0.22,-0.22)}]bs@c) --
+        ([shift={(0.22,0.22)}]bs@c);
+      \node[label,anchor=south west]
+        at ([shift={(0.28,0.28)}]bs@c) {#2};
+    \end{scope}
+  }
+
+  % ---- Mirror ----
+  \newcommand{\Mir}[3]{%
+    \begin{scope}
+      \coordinate (m@c) at #1;
+      \draw[line width=1.1pt,
+            rotate around={#3:(m@c)}]
+        ([shift={(-0.23,0)}]m@c) --
+        ([shift={(0.23,0)}]m@c);
+      \node[label,anchor=south west]
+        at ([shift={(0.25,0.15)}]m@c) {#2};
+    \end{scope}
+  }
+
+  % ---- Rough sample ----
+  \newcommand{\SampleMirror}[3]{%
+    \begin{scope}
+      \coordinate (s@c) at #1;
+      \draw[line width=1.1pt,
+            rotate around={#3:(s@c)}]
+        ([shift={(-0.23,0)}]s@c) --
+        ([shift={(0.23,0)}]s@c);
+      \draw[rotate around={#3:(s@c)},
+            decorate,
+            decoration={random steps,
+            segment length=2pt,amplitude=1pt}]
+        ([shift={(-0.23,0.06)}]s@c) --
+        ([shift={(0.23,0.06)}]s@c);
+      \node[label,anchor=south west]
+        at ([shift={(0.28,0.18)}]s@c) {#2};
+    \end{scope}
+  }
+
+  % ===================== (a) =====================
+  \begin{scope}
+    \node[anchor=north west] at (0,4.6) {\textbf{(a)}};
+
+    \coordinate (BS)   at (2.4,2.0);
+    \coordinate (Mref) at (5.4,2.0);
+    \coordinate (Samp) at (2.4,3.5);
+    \coordinate (Cam)  at (2.4,0.5);
+
+    % Laser
+    \draw[comp] (0.0,1.65) rectangle (1.2,2.35);
+    \node[label,anchor=center] at (0.6,2.0) {Laser};
+    \draw[fwd] (1.2,2.0) -- (BS);
+
+    % BS
+    \BSplate{(BS)}{BS}
+
+    % Arms
+    \draw[fwd] (BS) -- (Mref);
+    \draw[fwd] (BS) -- (Samp);
+
+    % Reference mirror + PZT
+    \coordinate (mr) at (5.4,2.0);
+    \draw[line width=1.1pt]
+      ([yshift=-0.3cm]mr) -- ([yshift=0.3cm]mr);
+    \draw[fill=gray!30]
+      ([yshift=-0.25cm]mr) --
+      ([shift={(0.3,0)}]mr) |-
+      ([yshift=0.25cm]mr) -- cycle;
+    \node[label,anchor=west] at (5.9,2.0) {PZT};
+
+    % Sample
+    \coordinate (sampC) at (2.4,3.5);
+    \draw[line width=1.1pt]
+      ([xshift=-0.3cm]sampC) -- ([xshift=0.3cm]sampC);
+    \draw[decorate,
+          decoration={random steps,
+          segment length=2pt,amplitude=1pt}]
+      ([xshift=-0.3cm,yshift=-0.01cm]sampC) --
+      ([xshift=0.3cm,yshift=-0.01cm]sampC);
+    \node[label,anchor=center] at (2.4,3.5) {Sample};
+
+    % Return
+    \draw[ret] ([yshift=0.08cm]Mref) -- ([yshift=0.08cm]BS);
+    \draw[ret] ([xshift=0.08cm]Samp) -- ([xshift=0.08cm]BS);
+
+    % Lens + camera
+    \coordinate (LensC) at (2.4,1.25);
+    \draw[line width=0.9pt] (2.4,1.25) ellipse (0.35 and 0.08);
+    \draw[fwd] (BS) -- (LensC);
+    \draw[fwd] (LensC) -- (Cam);
+
+    \draw[detector] (1.8,0.2) rectangle (3.0,0.8);
+    \node at (2.4,0.5) {Camera};
+  \end{scope}
+
+  % ===================== (b) =====================
+  \begin{scope}[shift={(0,-6.5)}]
+    \node[anchor=north west] at (0,5.2) {\textbf{(b)}};
+
+    \coordinate (BS1) at (1.8,1.5);
+    \coordinate (Mtop) at (1.8,3.5);
+    \coordinate (Sbot) at (6.0,1.5);
+    \coordinate (BS2) at (6.0,3.5);
+
+    % Source
+    \draw[comp] (0.0,1.15) rectangle (1.20,1.85);
+    \node[label,anchor=center] at (0.6,1.5) {SPDC};
+    \draw[fwd] (1.2,1.5) -- (BS1);
+
+    % BS1
+    \BSplate{(BS1)}{BS}
+
+    % Top arm
+    \draw[fwd] (BS1) -- (Mtop);
+    \Mir{(Mtop)}{M}{45}
+
+    \coordinate (PSin) at (3.6,3.5);
+    \coordinate (PSout) at (4.4,3.5);
+    \draw[fwd] (Mtop) -- (PSin);
+    \draw[fwd] (PSout) -- (BS2);
+
+    \draw[comp,fill=white]
+      (3.6,3.3) rectangle (4.4,3.7);
+    \node[label,anchor=center] at (4.0,3.5) {PS};
+
+    % Bottom arm
+    \draw[fwd] (BS1) -- (Sbot);
+    \SampleMirror{(Sbot)}{Sample}{45}
+    \draw[fwd] (Sbot) -- (BS2);
+
+    % BS2
+    \BSplate{(BS2)}{BS}
+
+    % Outputs
+    \coordinate (D1) at (7.8,3.5);
+    \coordinate (D2) at (6.0,5.0);
+
+    \draw[fwd] (BS2) -- (D1);
+    \draw[fwd] (BS2) -- (D2);
+
+    \draw[detector] (7.4,3.2) rectangle (8.2,3.8);
+    \node at (7.8,3.5) {$D_1$};
+
+    \draw[detector] (5.6,4.7) rectangle (6.4,5.3);
+    \node at (6.0,5.0) {$D_2$};
+
+    \draw[comp] (7.4,4.7) rectangle (8.6,5.3);
+    \node at (8.0,5.0) {Coinc.};
+
+    \draw[beam] (7.8,3.8) -- (7.8,4.7);
+    \draw[beam] (6.4,5.0) -- (7.4,5.0);
+
+    \draw[->,beam] (8.6,5.0) -- (9.4,5.0);
+    \node[label,anchor=west] at (9.5,5.0) {$G^{(2)}$};
+  \end{scope}
+\end{tikzpicture}

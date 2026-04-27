@@ -1,0 +1,184 @@
+\begin{tikzpicture}[
+	x=1cm, y=1cm,
+	font=\small,
+	>=Stealth,
+	scale=1.06,
+	transform shape,
+	line cap=round,
+	line join=round
+]
+
+\tikzset{
+	housing/.style={draw,rounded corners=2pt,fill=gray!6},
+	optic/.style={draw,rounded corners=1pt,fill=gray!12},
+	note/.style={font=\scriptsize,fill=white,inner sep=1.5pt,
+	             text opacity=1,fill opacity=0.92},
+	smallbox/.style={draw,rounded corners=1pt,fill=white,
+	                 inner sep=2pt,font=\scriptsize,align=center},
+	illum/.style={line width=1pt,draw=blue!60},
+	collect/.style={line width=1pt,draw=orange!80!black},
+	axis/.style={densely dashed,gray!50},
+	midarrow/.style={postaction={decorate,decoration={markings,
+		mark=at position 0.55 with {\arrow[scale=0.7]{Stealth}}}}},
+	midarrow rev/.style={postaction={decorate,decoration={markings,
+		mark=at position 0.55 with {\arrowreversed[scale=0.7]{Stealth}}}}},
+}
+
+% ================= PANEL A =================
+% Vertical order (top→bottom): illum. head → ring LED → beam splitter → objective → surface
+% Camera sensor branches sideways from beam splitter.
+\begin{scope}
+	\node[anchor=south west,font=\bfseries] at (-0.10,6.42) {(a)};
+
+	% --- description box ---
+	\draw[housing] (-0.10,5.48) rectangle (4.95,6.38);
+	\node[align=center,font=\scriptsize] at (2.425,5.93)
+		{FV height is assigned from the axial position\\
+		 of maximum local sharpness during the $z$~scan};
+
+	% --- optical axis (behind everything) ---
+	\draw[axis] (1.55,5.45) -- (1.55,0.55);
+	\node[note,anchor=north west] at (0.10,-0.05) {\scriptsize optical axis};
+
+	% --- illumination head ---
+	\draw[housing] (0.45,4.82) rectangle (2.65,5.40);
+	\node[font=\scriptsize] at (1.55,5.11) {illumination head};
+
+	% --- ring LED ---
+	\draw[optic,fill=yellow!25] (0.60,4.10) rectangle (2.50,4.56);
+	\node[font=\scriptsize] at (1.55,4.33) {ring LED};
+
+	% --- beam splitter ---
+	\draw[optic,fill=cyan!15] (0.60,3.40) rectangle (2.50,3.85);
+	\node[font=\scriptsize] at (1.55,3.625) {beam splitter};
+
+	% --- camera sensor ---
+	\draw[optic] (3.20,3.30) rectangle (4.90,3.95);
+	\node[font=\scriptsize] at (4.05,3.625) {camera sensor};
+
+	% --- objective lens with z-scan arrow ---
+	\draw[optic] (0.80,2.20) rectangle (2.30,3.04);
+	\node[font=\scriptsize] at (1.55,2.62) {objective};
+	% vertical movement arrow beside objective
+	\draw[<->,line width=0.7pt,gray!60] (2.45,2.07) -- (2.45,3.17);
+
+	% --- focal plane indicator ---
+	\draw[densely dotted,blue!40,line width=0.6pt] (0.40,0.46) -- (2.70,0.46);
+
+	% --- rough surface ---
+	\draw[fill=gray!20,draw=gray!55] (0.40,0.18) rectangle (2.70,0.42);
+	\draw[decorate,
+	      decoration={random steps,segment length=3pt,amplitude=0.6pt},
+	      line width=1pt]
+		(0.50,0.42) -- (2.60,0.42);
+	\node[smallbox,anchor=north west] at (2.85,0.65)
+		{measured\\rough surface};
+
+	% --- z-scan arrow (left side) ---
+	\draw[<->,line width=0.8pt] (0.18,0.18) -- (0.18,1.30);
+	\node[note,anchor=east] at (0.13,0.74) {$z$ scan};
+
+	% --- illumination path (blue, with mid-path arrows) ---
+	\draw[illum,midarrow] (1.55,4.10) -- (1.55,3.85);
+	\draw[illum,midarrow] (1.55,3.40) -- (1.55,3.04);
+	\draw[illum,midarrow] (1.55,2.20) -- (1.55,1.45);
+	\draw[illum] (1.55,1.45) -- (1.05,0.52);
+	\draw[illum] (1.55,1.45) -- (1.55,0.46);
+	\draw[illum] (1.55,1.45) -- (2.05,0.58);
+
+	% --- focus spot ---
+	\filldraw[orange!90!black] (1.55,0.46) circle (1.2pt);
+
+	% --- collection path (orange, with mid-path arrows) ---
+	\draw[collect,midarrow] (1.55,0.46) -- (1.55,2.20);
+	\draw[collect,midarrow] (1.55,3.04) -- (1.55,3.40);
+	\draw[collect,midarrow] (2.50,3.625) -- (3.20,3.625);
+
+	% --- local focus label ---
+	\node[smallbox,anchor=north west,text=blue!60] at (2.85,1.32) {local point\\in focus};
+
+	% --- legend ---
+	\draw[illum,line width=1.2pt] (3.30,1.85) -- (3.85,1.85);
+	\node[font=\scriptsize,anchor=west] at (3.90,1.85) {illumination};
+	\draw[collect,line width=1.2pt] (3.30,1.55) -- (3.85,1.55);
+	\node[font=\scriptsize,anchor=west] at (3.90,1.55) {collection};
+\end{scope}
+
+% ================= PANEL B =================
+\begin{scope}[shift={(6.20,0.0)}]
+	\node[anchor=south west,font=\bfseries] at (-0.10,6.42) {(b)};
+
+	% --- description box ---
+	\draw[housing] (0.20,5.48) rectangle (5.50,6.38);
+	\node[align=center,font=\scriptsize] at (2.85,5.93)
+		{The assigned height corresponds to the\\
+		 focus level that maximises local contrast};
+
+	% --- section label ---
+	\node[note,font=\scriptsize\itshape] at (2.85,5.20) {focus stack};
+
+	% --- three thumbnails (horizontal row) ---
+	% z_1
+	\draw[housing,fill=gray!10] (0.10,3.70) rectangle (1.80,4.90);
+	\draw[decorate,decoration={random steps,segment length=2pt,amplitude=0.4pt},
+	      line width=0.9pt] (0.25,4.27) -- (1.65,4.27);
+	\node[font=\scriptsize] at (0.95,3.85) {$z_1$};
+	\node[note] at (0.95,4.60) {low contrast};
+	% z* (teal border to highlight best-focus frame)
+	\draw[housing,fill=gray!24,draw=teal!70!black,line width=0.8pt]
+		(2.00,3.70) rectangle (3.70,4.90);
+	\draw[decorate,decoration={random steps,segment length=2pt,amplitude=0.4pt},
+	      line width=0.9pt] (2.15,4.27) -- (3.55,4.27);
+	\node[font=\scriptsize] at (2.85,3.85) {$z^*$};
+	\node[note] at (2.85,4.60) {sharp};
+	% z_2
+	\draw[housing,fill=gray!10] (3.90,3.70) rectangle (5.60,4.90);
+	\draw[decorate,decoration={random steps,segment length=2pt,amplitude=0.4pt},
+	      line width=0.9pt] (4.05,4.27) -- (5.45,4.27);
+	\node[font=\scriptsize] at (4.75,3.85) {$z_2$};
+	\node[note] at (4.75,4.60) {low contrast};
+
+	% --- sharpness / focus-metric curve ---
+	\begin{scope}[shift={(0.35,0.15)}]
+		\draw[->] (0,0) -- (0,2.90)
+			node[anchor=south,font=\scriptsize] {focus measure};
+		\draw[->] (0,0) -- (5.30,0)
+			node[anchor=west,font=\scriptsize] {$z$};
+
+		% smooth sharpness curve (peak at x=2.50)
+		\draw[line width=1.1pt,teal!70!black,smooth] plot coordinates {
+			(0.15,0.18)
+			(0.60,0.30)
+			(1.10,0.55)
+			(1.55,1.00)
+			(2.00,1.75)
+			(2.50,2.55)
+			(3.00,1.85)
+			(3.50,1.05)
+			(4.00,0.55)
+			(4.40,0.30)
+			(4.90,0.18)
+		};
+
+		% peak marker
+		\filldraw[teal!70!black] (2.50,2.55) circle (1.2pt);
+		\node[smallbox,anchor=south] at (2.50,2.68) {assigned height $z^*$};
+
+		% x-axis ticks for z1, z*, z2
+		\foreach \xp/\lab in {0.60/$z_1$, 2.50/$z^*$, 4.40/$z_2$} {
+			\draw (\xp,-0.08) -- (\xp,0.08);
+			\node[font=\scriptsize,anchor=north] at (\xp,-0.14) {\lab};
+		}
+	\end{scope}
+
+	% --- guide lines with arrow tips (thumbnail bottom → curve) ---
+	% z1
+	\draw[axis,-{Stealth[length=2.5pt,width=2pt]}] (0.95,3.70) -- (0.95,0.48);
+	% z* (highlighted, connects to the peak)
+	\draw[densely dashed,teal!70!black,line width=0.7pt,-{Stealth[length=2.5pt,width=2pt]}]
+		(2.85,3.70) -- (2.85,2.72);
+	% z2
+	\draw[axis,-{Stealth[length=2.5pt,width=2pt]}] (4.75,3.70) -- (4.75,0.48);
+\end{scope}
+
+\end{tikzpicture}

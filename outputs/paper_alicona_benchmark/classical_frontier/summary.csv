@@ -1,0 +1,237 @@
+stem,metric,best_variant,best_value,material,treatment
+1.4301_oselkowane,height_rmse_nm,classical_lsq_norm,559.1310391868753,Stainless steel 1.4301 (AISI 304),Honed
+1.4301_szkielkowane,height_rmse_nm,classical_ls_unwrap,443.6905881496816,Stainless steel 1.4301 (AISI 304),Glass bead blasted
+1.4301_szlifowane,height_rmse_nm,classical_ls_unwrap,0.24796758757664664,Stainless steel 1.4301 (AISI 304),Grinding
+1.4301_t_wyk,height_rmse_nm,classical_ls_unwrap,845.4390991224726,Stainless steel 1.4301 (AISI 304),Turning (finishing)
+AL_oselkowane,height_rmse_nm,classical_lsq_norm,507.082268564754,Aluminium 7075,Honed
+Al7075_t_wyk,height_rmse_nm,classical_ls_unwrap,655.2771388396994,Aluminium 7075,Turning (finishing)
+Al_szkielkowane,height_rmse_nm,classical_ls_unwrap,284.0517991393043,Aluminium 7075,Glass bead blasted
+Al_szlifowane,height_rmse_nm,classical_default,0.2493064211716268,Aluminium 7075,Grinding
+C45_oselkowane,height_rmse_nm,classical_lsq_norm,253.9952652716134,Steel C45,Honed
+C45_szkielkowane,height_rmse_nm,classical_lsq_norm,255.6798722521265,Steel C45,Glass bead blasted
+C45_szlifowane,height_rmse_nm,classical_ls_unwrap,284.60233019905894,Steel C45,Grinding
+C45_t_wyk,height_rmse_nm,classical_ls_unwrap,3777.2399816972897,Steel C45,Turning (finishing)
+ELLOR_t_wyk,height_rmse_nm,classical_lsq_norm,1848.4753767773914,Graphite,Turning (finishing)
+Graphite_oselkowane,height_rmse_nm,classical_lsq_norm,300.7387624817127,Graphite,Honed
+Graphite_szkielkowane,height_rmse_nm,classical_ls_unwrap,4832.271261326587,Graphite,Glass bead blasted
+Graphite_szlifowane,height_rmse_nm,classical_ls_unwrap,914.0726139839729,Graphite,Grinding
+MO58A_t_wyk,height_rmse_nm,classical_ls_unwrap,0.24897125764437858,Brass,Turning (finishing)
+Mosiadz_oselkowane,height_rmse_nm,classical_ls_unwrap,911.8504579854088,Brass,Honed
+Mosiadz_szkielkowane,height_rmse_nm,classical_ls_unwrap,2462.6992468905405,Brass,Glass bead blasted
+Mosiadz_szlifowane,height_rmse_nm,classical_ls_unwrap,179486.8110160278,Brass,Grinding
+P1-1.4301-t.zgrub,height_rmse_nm,classical_ls_unwrap,2163.227351873514,Stainless steel 1.4301 (AISI 304),Turning (roughing)
+P1-1.4301_frez_wyk,height_rmse_nm,classical_lsq_norm,602.1548341172995,Stainless steel 1.4301 (AISI 304),Milling (finishing)
+P1-1.4301_frez_zgrub,height_rmse_nm,classical_ls_unwrap,905.2950689443227,Stainless steel 1.4301 (AISI 304),Milling (roughing)
+P1-1.4301_nagniat,height_rmse_nm,classical_ls_unwrap,283.6945440402498,Stainless steel 1.4301 (AISI 304),Burnishing
+P1-1.4301_wedm_wyk,height_rmse_nm,classical_ls_unwrap,490.9485427580491,Stainless steel 1.4301 (AISI 304),Wire EDM (finishing)
+P1-1.4301_wedm_zgru,height_rmse_nm,classical_ls_unwrap,0.2490601627046664,Stainless steel 1.4301 (AISI 304),Wire EDM (roughing)
+P1-AL70752_nagniat,height_rmse_nm,classical_lsq_norm,33.156985884792434,Aluminium 7075,Burnishing
+P1-AL70752_wedm_wyk,height_rmse_nm,classical_default,0.24890183973758176,Aluminium 7075,Wire EDM (finishing)
+P1-AL70752_wedm_zgru_1prz,height_rmse_nm,classical_ls_unwrap,5657.44285127694,Aluminium 7075,Wire EDM (roughing)
+P1-AL7075_frez_wyk,height_rmse_nm,classical_lsq_norm,468767.3231836151,Aluminium 7075,Milling (finishing)
+P1-AL7075_frez_zgr,height_rmse_nm,classical_lsq_norm,124.48586224769141,Aluminium 7075,Milling (roughing)
+P1-AL7075_t_zgrub,height_rmse_nm,classical_lsq_norm,3200.453077271177,Aluminium 7075,Turning (roughing)
+P1-C45_frez_wyk,height_rmse_nm,classical_ls_unwrap,214.16756217821273,Steel C45,Milling (finishing)
+P1-C45_frez_zgr,height_rmse_nm,classical_default,0.24911744336283442,Steel C45,Milling (roughing)
+P1-C45_nagniat,height_rmse_nm,classical_ls_unwrap,504.0302976572182,Steel C45,Burnishing
+P1-C45_t_zgrubne,height_rmse_nm,classical_ls_unwrap,7139.452779734899,Steel C45,Turning (roughing)
+P1-C45_wedm_wyk,height_rmse_nm,classical_default,112800.18783487767,Steel C45,Wire EDM (finishing)
+P1-C45_wedm_zgru_1prz,height_rmse_nm,classical_lsq_norm,5001.29774687839,Steel C45,Wire EDM (roughing)
+P1-ELLOR_frez_wyk,height_rmse_nm,classical_ls_unwrap,22.28380898900179,Graphite,Milling (finishing)
+P1-ELLOR_frez_zgr,height_rmse_nm,classical_default,0.24918509883894618,Graphite,Milling (roughing)
+P1-ELLOR_t_zgrub,height_rmse_nm,classical_lsq_norm,2641894.5695615713,Graphite,Turning (roughing)
+P1-ELLOR_wedm_wyk,height_rmse_nm,classical_ls_unwrap,1493.0077655300595,Graphite,Wire EDM (finishing)
+P1-ELLOR_wedm_zgru_1prz,height_rmse_nm,classical_ls_unwrap,1567.077735490681,Graphite,Wire EDM (roughing)
+P1-MO58A_frez_wyk,height_rmse_nm,classical_lsq_norm,279.96438401583526,Brass,Milling (finishing)
+P1-MO58A_frez_zgr,height_rmse_nm,classical_lsq_norm,1923.4554939450254,Brass,Milling (roughing)
+P1-MO58A_nagniat,height_rmse_nm,classical_ls_unwrap,1.5594930082348102,Brass,Burnishing
+P1-MO58A_t_zgrub,height_rmse_nm,classical_ls_unwrap,1634.470177177173,Brass,Turning (roughing)
+P1-MO58A_wedm_wyk,height_rmse_nm,classical_ls_unwrap,613.7954035089725,Brass,Wire EDM (finishing)
+P1-MO58A_wedm_zgru_1prz,height_rmse_nm,classical_lsq_norm,95543.55290584239,Brass,Wire EDM (roughing)
+P1-Ti6A14V_frez_wyk,height_rmse_nm,classical_lsq_norm,615.346671134293,Titanium,Milling (finishing)
+P1-Ti6A14V_frez_zgr,height_rmse_nm,classical_ls_unwrap,800.8002134986494,Titanium,Milling (roughing)
+P1-Ti6A14V_nagniat,height_rmse_nm,classical_ls_unwrap,452.1960882596011,Titanium,Burnishing
+P1-Ti6A14V_t_wyk,height_rmse_nm,classical_ls_unwrap,422.94288119378234,Titanium,Turning (finishing)
+P1-Ti6A14V_t_zgrub,height_rmse_nm,classical_lsq_norm,3381.3528152373706,Titanium,Turning (roughing)
+P1-Ti6A14V_wedm_wyk,height_rmse_nm,classical_lsq_norm,261.25086327961884,Titanium,Wire EDM (finishing)
+P1-Ti6A14V_wedm_zgru_1prz,height_rmse_nm,classical_ls_unwrap,4519.817222423091,Titanium,Wire EDM (roughing)
+Ti_oselkowane,height_rmse_nm,classical_lsq_norm,410.1281477375316,Titanium,Honed
+Ti_szkielkowane,height_rmse_nm,classical_ls_unwrap,371.879706814102,Titanium,Glass bead blasted
+Ti_szlifowane,height_rmse_nm,classical_lsq_norm,273.51615327784344,Titanium,Grinding
+1.4301_oselkowane,abs_bias_Sa_nm,classical_two_color,251.76434780327165,Stainless steel 1.4301 (AISI 304),Honed
+1.4301_szkielkowane,abs_bias_Sa_nm,classical_default,210.2871190368919,Stainless steel 1.4301 (AISI 304),Glass bead blasted
+1.4301_szlifowane,abs_bias_Sa_nm,classical_ls_unwrap,3.4251869397726313,Stainless steel 1.4301 (AISI 304),Grinding
+1.4301_t_wyk,abs_bias_Sa_nm,classical_default,44.13583002883642,Stainless steel 1.4301 (AISI 304),Turning (finishing)
+AL_oselkowane,abs_bias_Sa_nm,classical_default,50.41342188861836,Aluminium 7075,Honed
+Al7075_t_wyk,abs_bias_Sa_nm,classical_default,139.63834448952784,Aluminium 7075,Turning (finishing)
+Al_szkielkowane,abs_bias_Sa_nm,classical_lsq_norm,169.24697467203208,Aluminium 7075,Glass bead blasted
+Al_szlifowane,abs_bias_Sa_nm,classical_lsq_norm,1.456252851086143,Aluminium 7075,Grinding
+C45_oselkowane,abs_bias_Sa_nm,classical_default,172.47423740867583,Steel C45,Honed
+C45_szkielkowane,abs_bias_Sa_nm,classical_lsq_norm,240.59299742613578,Steel C45,Glass bead blasted
+C45_szlifowane,abs_bias_Sa_nm,classical_ls_unwrap,221.52490769945754,Steel C45,Grinding
+C45_t_wyk,abs_bias_Sa_nm,classical_two_color,45.86995698511639,Steel C45,Turning (finishing)
+ELLOR_t_wyk,abs_bias_Sa_nm,classical_two_color,107.32625144028154,Graphite,Turning (finishing)
+Graphite_oselkowane,abs_bias_Sa_nm,classical_lsq_norm,106.62047696606419,Graphite,Honed
+Graphite_szkielkowane,abs_bias_Sa_nm,classical_two_color,32.85287159629972,Graphite,Glass bead blasted
+Graphite_szlifowane,abs_bias_Sa_nm,classical_default,5.102113525998303,Graphite,Grinding
+MO58A_t_wyk,abs_bias_Sa_nm,classical_ls_unwrap,0.023780821812665477,Brass,Turning (finishing)
+Mosiadz_oselkowane,abs_bias_Sa_nm,classical_default,55.99144927131262,Brass,Honed
+Mosiadz_szkielkowane,abs_bias_Sa_nm,classical_two_color,55.005492564632924,Brass,Glass bead blasted
+Mosiadz_szlifowane,abs_bias_Sa_nm,classical_default,168862.6530265212,Brass,Grinding
+P1-1.4301-t.zgrub,abs_bias_Sa_nm,classical_two_color,47.216647305964585,Stainless steel 1.4301 (AISI 304),Turning (roughing)
+P1-1.4301_frez_wyk,abs_bias_Sa_nm,classical_ls_unwrap,87.25930229116992,Stainless steel 1.4301 (AISI 304),Milling (finishing)
+P1-1.4301_frez_zgrub,abs_bias_Sa_nm,classical_default,41.688884050465774,Stainless steel 1.4301 (AISI 304),Milling (roughing)
+P1-1.4301_nagniat,abs_bias_Sa_nm,classical_default,2.315925840733244,Stainless steel 1.4301 (AISI 304),Burnishing
+P1-1.4301_wedm_wyk,abs_bias_Sa_nm,classical_default,143.51008637860312,Stainless steel 1.4301 (AISI 304),Wire EDM (finishing)
+P1-1.4301_wedm_zgru,abs_bias_Sa_nm,classical_ls_unwrap,0.15004782201111874,Stainless steel 1.4301 (AISI 304),Wire EDM (roughing)
+P1-AL70752_nagniat,abs_bias_Sa_nm,classical_default,7.331708285304945,Aluminium 7075,Burnishing
+P1-AL70752_wedm_wyk,abs_bias_Sa_nm,classical_default,0.19783431588119926,Aluminium 7075,Wire EDM (finishing)
+P1-AL70752_wedm_zgru_1prz,abs_bias_Sa_nm,classical_two_color,27.58070989444198,Aluminium 7075,Wire EDM (roughing)
+P1-AL7075_frez_wyk,abs_bias_Sa_nm,classical_two_color,11481.022396567301,Aluminium 7075,Milling (finishing)
+P1-AL7075_frez_zgr,abs_bias_Sa_nm,classical_ls_unwrap,64.1729260188001,Aluminium 7075,Milling (roughing)
+P1-AL7075_t_zgrub,abs_bias_Sa_nm,classical_two_color,31.907263588405883,Aluminium 7075,Turning (roughing)
+P1-C45_frez_wyk,abs_bias_Sa_nm,classical_ls_unwrap,71.54916703441661,Steel C45,Milling (finishing)
+P1-C45_frez_zgr,abs_bias_Sa_nm,classical_default,0.1849712038762052,Steel C45,Milling (roughing)
+P1-C45_nagniat,abs_bias_Sa_nm,classical_lsq_norm,107.64865213007158,Steel C45,Burnishing
+P1-C45_t_zgrubne,abs_bias_Sa_nm,classical_two_color,25.752319005366985,Steel C45,Turning (roughing)
+P1-C45_wedm_wyk,abs_bias_Sa_nm,classical_default,163743.68797505833,Steel C45,Wire EDM (finishing)
+P1-C45_wedm_zgru_1prz,abs_bias_Sa_nm,classical_two_color,37.5527209146485,Steel C45,Wire EDM (roughing)
+P1-ELLOR_frez_wyk,abs_bias_Sa_nm,classical_ls_unwrap,6.3612724050533895,Graphite,Milling (finishing)
+P1-ELLOR_frez_zgr,abs_bias_Sa_nm,classical_default,0.18277288041508066,Graphite,Milling (roughing)
+P1-ELLOR_t_zgrub,abs_bias_Sa_nm,classical_two_color,895383.7845621281,Graphite,Turning (roughing)
+P1-ELLOR_wedm_wyk,abs_bias_Sa_nm,classical_two_color,133.6331787541464,Graphite,Wire EDM (finishing)
+P1-ELLOR_wedm_zgru_1prz,abs_bias_Sa_nm,classical_two_color,117.60965972850322,Graphite,Wire EDM (roughing)
+P1-MO58A_frez_wyk,abs_bias_Sa_nm,classical_default,0.793283011607283,Brass,Milling (finishing)
+P1-MO58A_frez_zgr,abs_bias_Sa_nm,classical_two_color,76.16172632562845,Brass,Milling (roughing)
+P1-MO58A_nagniat,abs_bias_Sa_nm,classical_default,4.008313777658252,Brass,Burnishing
+P1-MO58A_t_zgrub,abs_bias_Sa_nm,classical_two_color,91.7938981857392,Brass,Turning (roughing)
+P1-MO58A_wedm_wyk,abs_bias_Sa_nm,classical_default,74.23379519031428,Brass,Wire EDM (finishing)
+P1-MO58A_wedm_zgru_1prz,abs_bias_Sa_nm,classical_default,87832.65691606283,Brass,Wire EDM (roughing)
+P1-Ti6A14V_frez_wyk,abs_bias_Sa_nm,classical_default,120.65610115492642,Titanium,Milling (finishing)
+P1-Ti6A14V_frez_zgr,abs_bias_Sa_nm,classical_default,77.00341845294845,Titanium,Milling (roughing)
+P1-Ti6A14V_nagniat,abs_bias_Sa_nm,classical_lsq_norm,191.6834199928678,Titanium,Burnishing
+P1-Ti6A14V_t_wyk,abs_bias_Sa_nm,classical_ls_unwrap,219.03763927956987,Titanium,Turning (finishing)
+P1-Ti6A14V_t_zgrub,abs_bias_Sa_nm,classical_two_color,28.774260820064328,Titanium,Turning (roughing)
+P1-Ti6A14V_wedm_wyk,abs_bias_Sa_nm,classical_default,295.2588116257265,Titanium,Wire EDM (finishing)
+P1-Ti6A14V_wedm_zgru_1prz,abs_bias_Sa_nm,classical_two_color,31.395593670874057,Titanium,Wire EDM (roughing)
+Ti_oselkowane,abs_bias_Sa_nm,classical_default,136.85152812692513,Titanium,Honed
+Ti_szkielkowane,abs_bias_Sa_nm,classical_ls_unwrap,228.31785462142173,Titanium,Glass bead blasted
+Ti_szlifowane,abs_bias_Sa_nm,classical_ls_unwrap,156.4899443790584,Titanium,Grinding
+1.4301_oselkowane,abs_bias_Sq_nm,classical_default,34.60934386255495,Stainless steel 1.4301 (AISI 304),Honed
+1.4301_szkielkowane,abs_bias_Sq_nm,classical_two_color,315.9825646415769,Stainless steel 1.4301 (AISI 304),Glass bead blasted
+1.4301_szlifowane,abs_bias_Sq_nm,classical_ls_unwrap,4.443901629927432,Stainless steel 1.4301 (AISI 304),Grinding
+1.4301_t_wyk,abs_bias_Sq_nm,classical_two_color,200.35591874969202,Stainless steel 1.4301 (AISI 304),Turning (finishing)
+AL_oselkowane,abs_bias_Sq_nm,classical_default,61.48906409338029,Aluminium 7075,Honed
+Al7075_t_wyk,abs_bias_Sq_nm,classical_default,23.13296825566148,Aluminium 7075,Turning (finishing)
+Al_szkielkowane,abs_bias_Sq_nm,classical_lsq_norm,201.62136946111295,Aluminium 7075,Glass bead blasted
+Al_szlifowane,abs_bias_Sq_nm,classical_lsq_norm,0.7547051732878907,Aluminium 7075,Grinding
+C45_oselkowane,abs_bias_Sq_nm,classical_default,225.84688745829243,Steel C45,Honed
+C45_szkielkowane,abs_bias_Sq_nm,classical_lsq_norm,300.71160115346566,Steel C45,Glass bead blasted
+C45_szlifowane,abs_bias_Sq_nm,classical_ls_unwrap,282.50645647213224,Steel C45,Grinding
+C45_t_wyk,abs_bias_Sq_nm,classical_two_color,48.31260458156394,Steel C45,Turning (finishing)
+ELLOR_t_wyk,abs_bias_Sq_nm,classical_two_color,99.57901741771437,Graphite,Turning (finishing)
+Graphite_oselkowane,abs_bias_Sq_nm,classical_default,8.68330930765913,Graphite,Honed
+Graphite_szkielkowane,abs_bias_Sq_nm,classical_two_color,39.968932861147906,Graphite,Glass bead blasted
+Graphite_szlifowane,abs_bias_Sq_nm,classical_default,39.693763732318054,Graphite,Grinding
+MO58A_t_wyk,abs_bias_Sq_nm,classical_ls_unwrap,0.004697931651901062,Brass,Turning (finishing)
+Mosiadz_oselkowane,abs_bias_Sq_nm,classical_default,70.47178252582506,Brass,Honed
+Mosiadz_szkielkowane,abs_bias_Sq_nm,classical_two_color,74.65667124801925,Brass,Glass bead blasted
+Mosiadz_szlifowane,abs_bias_Sq_nm,classical_default,203818.43423779792,Brass,Grinding
+P1-1.4301-t.zgrub,abs_bias_Sq_nm,classical_two_color,84.67620812574977,Stainless steel 1.4301 (AISI 304),Turning (roughing)
+P1-1.4301_frez_wyk,abs_bias_Sq_nm,classical_ls_unwrap,283.89474028846195,Stainless steel 1.4301 (AISI 304),Milling (finishing)
+P1-1.4301_frez_zgrub,abs_bias_Sq_nm,classical_default,169.55377374414053,Stainless steel 1.4301 (AISI 304),Milling (roughing)
+P1-1.4301_nagniat,abs_bias_Sq_nm,classical_two_color,362.37833375135347,Stainless steel 1.4301 (AISI 304),Burnishing
+P1-1.4301_wedm_wyk,abs_bias_Sq_nm,classical_default,165.85652302393189,Stainless steel 1.4301 (AISI 304),Wire EDM (finishing)
+P1-1.4301_wedm_zgru,abs_bias_Sq_nm,classical_ls_unwrap,0.1699312450214713,Stainless steel 1.4301 (AISI 304),Wire EDM (roughing)
+P1-AL70752_nagniat,abs_bias_Sq_nm,classical_default,8.247744474352672,Aluminium 7075,Burnishing
+P1-AL70752_wedm_wyk,abs_bias_Sq_nm,classical_default,0.24748679407823648,Aluminium 7075,Wire EDM (finishing)
+P1-AL70752_wedm_zgru_1prz,abs_bias_Sq_nm,classical_two_color,34.322715359707956,Aluminium 7075,Wire EDM (roughing)
+P1-AL7075_frez_wyk,abs_bias_Sq_nm,classical_two_color,923.3373088443805,Aluminium 7075,Milling (finishing)
+P1-AL7075_frez_zgr,abs_bias_Sq_nm,classical_default,14.234428504372927,Aluminium 7075,Milling (roughing)
+P1-AL7075_t_zgrub,abs_bias_Sq_nm,classical_two_color,56.75577230282201,Aluminium 7075,Turning (roughing)
+P1-C45_frez_wyk,abs_bias_Sq_nm,classical_ls_unwrap,199.38687857778874,Steel C45,Milling (finishing)
+P1-C45_frez_zgr,abs_bias_Sq_nm,classical_default,0.23227074361935987,Steel C45,Milling (roughing)
+P1-C45_nagniat,abs_bias_Sq_nm,classical_two_color,284.5309292776333,Steel C45,Burnishing
+P1-C45_t_zgrubne,abs_bias_Sq_nm,classical_two_color,26.01366723798912,Steel C45,Turning (roughing)
+P1-C45_wedm_wyk,abs_bias_Sq_nm,classical_default,258878.37880116847,Steel C45,Wire EDM (finishing)
+P1-C45_wedm_zgru_1prz,abs_bias_Sq_nm,classical_two_color,37.92105555024819,Steel C45,Wire EDM (roughing)
+P1-ELLOR_frez_wyk,abs_bias_Sq_nm,classical_lsq_norm,3.4199171488908924,Graphite,Milling (finishing)
+P1-ELLOR_frez_zgr,abs_bias_Sq_nm,classical_default,0.22011200564253608,Graphite,Milling (roughing)
+P1-ELLOR_t_zgrub,abs_bias_Sq_nm,classical_two_color,1492649.7216151897,Graphite,Turning (roughing)
+P1-ELLOR_wedm_wyk,abs_bias_Sq_nm,classical_two_color,121.41138721386791,Graphite,Wire EDM (finishing)
+P1-ELLOR_wedm_zgru_1prz,abs_bias_Sq_nm,classical_two_color,117.65973469892934,Graphite,Wire EDM (roughing)
+P1-MO58A_frez_wyk,abs_bias_Sq_nm,classical_default,46.17081541614563,Brass,Milling (finishing)
+P1-MO58A_frez_zgr,abs_bias_Sq_nm,classical_two_color,95.37816110733395,Brass,Milling (roughing)
+P1-MO58A_nagniat,abs_bias_Sq_nm,classical_default,6.206971763641638,Brass,Burnishing
+P1-MO58A_t_zgrub,abs_bias_Sq_nm,classical_two_color,111.12678473817084,Brass,Turning (roughing)
+P1-MO58A_wedm_wyk,abs_bias_Sq_nm,classical_two_color,254.73281222225341,Brass,Wire EDM (finishing)
+P1-MO58A_wedm_zgru_1prz,abs_bias_Sq_nm,classical_default,113801.92069757864,Brass,Wire EDM (roughing)
+P1-Ti6A14V_frez_wyk,abs_bias_Sq_nm,classical_default,175.210531663837,Titanium,Milling (finishing)
+P1-Ti6A14V_frez_zgr,abs_bias_Sq_nm,classical_default,84.00248778949059,Titanium,Milling (roughing)
+P1-Ti6A14V_nagniat,abs_bias_Sq_nm,classical_default,23.78554046505947,Titanium,Burnishing
+P1-Ti6A14V_t_wyk,abs_bias_Sq_nm,classical_ls_unwrap,254.67308492744021,Titanium,Turning (finishing)
+P1-Ti6A14V_t_zgrub,abs_bias_Sq_nm,classical_two_color,56.328650663888915,Titanium,Turning (roughing)
+P1-Ti6A14V_wedm_wyk,abs_bias_Sq_nm,classical_default,391.5979206278126,Titanium,Wire EDM (finishing)
+P1-Ti6A14V_wedm_zgru_1prz,abs_bias_Sq_nm,classical_two_color,39.92814370739655,Titanium,Wire EDM (roughing)
+Ti_oselkowane,abs_bias_Sq_nm,classical_default,247.29343554177947,Titanium,Honed
+Ti_szkielkowane,abs_bias_Sq_nm,classical_ls_unwrap,286.52049389398707,Titanium,Glass bead blasted
+Ti_szlifowane,abs_bias_Sq_nm,classical_ls_unwrap,186.42225836009757,Titanium,Grinding
+1.4301_oselkowane,abs_bias_Sz_nm,classical_two_color,2302.3313319941153,Stainless steel 1.4301 (AISI 304),Honed
+1.4301_szkielkowane,abs_bias_Sz_nm,classical_default,2105.997137037915,Stainless steel 1.4301 (AISI 304),Glass bead blasted
+1.4301_szlifowane,abs_bias_Sz_nm,classical_lsq_norm,75.94763356904942,Stainless steel 1.4301 (AISI 304),Grinding
+1.4301_t_wyk,abs_bias_Sz_nm,classical_two_color,903.5691194613572,Stainless steel 1.4301 (AISI 304),Turning (finishing)
+AL_oselkowane,abs_bias_Sz_nm,classical_default,1577.5635376160353,Aluminium 7075,Honed
+Al7075_t_wyk,abs_bias_Sz_nm,classical_two_color,637.2649466618736,Aluminium 7075,Turning (finishing)
+Al_szkielkowane,abs_bias_Sz_nm,classical_lsq_norm,1907.7660345505647,Aluminium 7075,Glass bead blasted
+Al_szlifowane,abs_bias_Sz_nm,classical_lsq_norm,152.75335785155065,Aluminium 7075,Grinding
+C45_oselkowane,abs_bias_Sz_nm,classical_default,1354.4649097595818,Steel C45,Honed
+C45_szkielkowane,abs_bias_Sz_nm,classical_lsq_norm,1897.7235883383328,Steel C45,Glass bead blasted
+C45_szlifowane,abs_bias_Sz_nm,classical_default,1400.880539779107,Steel C45,Grinding
+C45_t_wyk,abs_bias_Sz_nm,classical_two_color,562.1658731964774,Steel C45,Turning (finishing)
+ELLOR_t_wyk,abs_bias_Sz_nm,classical_two_color,631.5727920501167,Graphite,Turning (finishing)
+Graphite_oselkowane,abs_bias_Sz_nm,classical_two_color,393.51062391225264,Graphite,Honed
+Graphite_szkielkowane,abs_bias_Sz_nm,classical_two_color,1460.9669275873175,Graphite,Glass bead blasted
+Graphite_szlifowane,abs_bias_Sz_nm,classical_two_color,580.8559486993507,Graphite,Grinding
+MO58A_t_wyk,abs_bias_Sz_nm,classical_default,8.427325815895895,Brass,Turning (finishing)
+Mosiadz_oselkowane,abs_bias_Sz_nm,classical_two_color,1438.7682199329242,Brass,Honed
+Mosiadz_szkielkowane,abs_bias_Sz_nm,classical_two_color,391.1337257417126,Brass,Glass bead blasted
+Mosiadz_szlifowane,abs_bias_Sz_nm,classical_default,1240930.8230584194,Brass,Grinding
+P1-1.4301-t.zgrub,abs_bias_Sz_nm,classical_two_color,1743.5310543167561,Stainless steel 1.4301 (AISI 304),Turning (roughing)
+P1-1.4301_frez_wyk,abs_bias_Sz_nm,classical_two_color,1624.0569931037517,Stainless steel 1.4301 (AISI 304),Milling (finishing)
+P1-1.4301_frez_zgrub,abs_bias_Sz_nm,classical_two_color,2021.6277124138537,Stainless steel 1.4301 (AISI 304),Milling (roughing)
+P1-1.4301_nagniat,abs_bias_Sz_nm,classical_two_color,652.1759739503195,Stainless steel 1.4301 (AISI 304),Burnishing
+P1-1.4301_wedm_wyk,abs_bias_Sz_nm,classical_two_color,281.24051490363354,Stainless steel 1.4301 (AISI 304),Wire EDM (finishing)
+P1-1.4301_wedm_zgru,abs_bias_Sz_nm,classical_default,0.6936372121160725,Stainless steel 1.4301 (AISI 304),Wire EDM (roughing)
+P1-AL70752_nagniat,abs_bias_Sz_nm,classical_default,2565.8921070844235,Aluminium 7075,Burnishing
+P1-AL70752_wedm_wyk,abs_bias_Sz_nm,classical_ls_unwrap,1.9921479711412469,Aluminium 7075,Wire EDM (finishing)
+P1-AL70752_wedm_zgru_1prz,abs_bias_Sz_nm,classical_two_color,603.93175732026,Aluminium 7075,Wire EDM (roughing)
+P1-AL7075_frez_wyk,abs_bias_Sz_nm,classical_two_color,3419182.474337569,Aluminium 7075,Milling (finishing)
+P1-AL7075_frez_zgr,abs_bias_Sz_nm,classical_two_color,1568.625733947008,Aluminium 7075,Milling (roughing)
+P1-AL7075_t_zgrub,abs_bias_Sz_nm,classical_two_color,1464.644981519868,Aluminium 7075,Turning (roughing)
+P1-C45_frez_wyk,abs_bias_Sz_nm,classical_two_color,3279.018668121666,Steel C45,Milling (finishing)
+P1-C45_frez_zgr,abs_bias_Sz_nm,classical_ls_unwrap,1.6419700212650297,Steel C45,Milling (roughing)
+P1-C45_nagniat,abs_bias_Sz_nm,classical_two_color,522.6181979442339,Steel C45,Burnishing
+P1-C45_t_zgrubne,abs_bias_Sz_nm,classical_two_color,544.9066949720597,Steel C45,Turning (roughing)
+P1-C45_wedm_wyk,abs_bias_Sz_nm,classical_two_color,567684.6242801239,Steel C45,Wire EDM (finishing)
+P1-C45_wedm_zgru_1prz,abs_bias_Sz_nm,classical_two_color,912.8134924245128,Steel C45,Wire EDM (roughing)
+P1-ELLOR_frez_wyk,abs_bias_Sz_nm,classical_default,50.118124951954016,Graphite,Milling (finishing)
+P1-ELLOR_frez_zgr,abs_bias_Sz_nm,classical_default,1.3442003723098628,Graphite,Milling (roughing)
+P1-ELLOR_t_zgrub,abs_bias_Sz_nm,classical_two_color,26258058.18678715,Graphite,Turning (roughing)
+P1-ELLOR_wedm_wyk,abs_bias_Sz_nm,classical_two_color,1722.4415847118878,Graphite,Wire EDM (finishing)
+P1-ELLOR_wedm_zgru_1prz,abs_bias_Sz_nm,classical_two_color,1207.8366674834201,Graphite,Wire EDM (roughing)
+P1-MO58A_frez_wyk,abs_bias_Sz_nm,classical_two_color,2616.3180417883013,Brass,Milling (finishing)
+P1-MO58A_frez_zgr,abs_bias_Sz_nm,classical_two_color,2278.4507946292906,Brass,Milling (roughing)
+P1-MO58A_nagniat,abs_bias_Sz_nm,classical_default,2447.9074817901237,Brass,Burnishing
+P1-MO58A_t_zgrub,abs_bias_Sz_nm,classical_two_color,1368.5457291634543,Brass,Turning (roughing)
+P1-MO58A_wedm_wyk,abs_bias_Sz_nm,classical_two_color,322.0687837968359,Brass,Wire EDM (finishing)
+P1-MO58A_wedm_zgru_1prz,abs_bias_Sz_nm,classical_two_color,2501527.024643887,Brass,Wire EDM (roughing)
+P1-Ti6A14V_frez_wyk,abs_bias_Sz_nm,classical_default,1014.452223064495,Titanium,Milling (finishing)
+P1-Ti6A14V_frez_zgr,abs_bias_Sz_nm,classical_two_color,1101.1356105308073,Titanium,Milling (roughing)
+P1-Ti6A14V_nagniat,abs_bias_Sz_nm,classical_two_color,2347.4098521094584,Titanium,Burnishing
+P1-Ti6A14V_t_wyk,abs_bias_Sz_nm,classical_default,801.2650796365244,Titanium,Turning (finishing)
+P1-Ti6A14V_t_zgrub,abs_bias_Sz_nm,classical_two_color,289.48742499049627,Titanium,Turning (roughing)
+P1-Ti6A14V_wedm_wyk,abs_bias_Sz_nm,classical_two_color,2306.254428883079,Titanium,Wire EDM (finishing)
+P1-Ti6A14V_wedm_zgru_1prz,abs_bias_Sz_nm,classical_two_color,383.357560897997,Titanium,Wire EDM (roughing)
+Ti_oselkowane,abs_bias_Sz_nm,classical_two_color,1427.4897881153347,Titanium,Honed
+Ti_szkielkowane,abs_bias_Sz_nm,classical_default,2178.9168239278797,Titanium,Glass bead blasted
+Ti_szlifowane,abs_bias_Sz_nm,classical_lsq_norm,2349.094931306853,Titanium,Grinding

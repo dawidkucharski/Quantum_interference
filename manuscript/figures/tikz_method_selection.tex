@@ -1,0 +1,34 @@
+% Practical method-selection flow derived from the grouped benchmark trends
+\begin{tikzpicture}[x=1cm,y=1cm, font=\footnotesize, >=Stealth]
+  \tikzset{
+    head/.style={draw, rounded corners=3pt, fill=gray!14, align=center, text width=4.7cm, minimum height=0.95cm, inner sep=5pt},
+    qbox/.style={draw, rounded corners=3pt, fill=gray!8, align=center, text width=3.35cm, minimum height=1.55cm, inner sep=5pt},
+    mbox/.style={draw, rounded corners=3pt, fill=gray!3, align=left, text width=3.45cm, minimum height=1.95cm, inner sep=6pt},
+    note/.style={draw, rounded corners=3pt, fill=gray!8, align=center, text width=8.8cm, minimum height=0.95cm, inner sep=5pt},
+    line/.style={-Stealth, line width=0.85pt}
+  }
+
+  \node[head] (start) at (0,0) {\textbf{Method selection guide}\\Choose the branch that matches the metrology endpoint.};
+
+  \node[qbox] (rmseq) at (-4.4,-2.2) {\textbf{Height fidelity}\\Lowest RMSE or best fine\\texture reproduction};
+  \node[qbox] (hybq) at (0,-2.2) {\textbf{Coarse prior needed}\\Ambiguity tolerance, but\\keep classical fine detail};
+  \node[qbox] (qq) at (4.4,-2.2) {\textbf{Envelope descriptors}\\$S_q$ or $S_z$ matters more than\\the very lowest RMSE};
+
+  \node[mbox] (classic) at (-4.4,-5.0) {\textbf{Classical PSI}\\Default baseline\\Best fit for rougher classes: grinding, rough turning, milling finishing, wire EDM.};
+  \node[mbox] (hybrid) at (0,-5.0) {\textbf{Hybrid}\\Best nonclassical compromise\\Use when $S_a$ matters or when coincidence information should only stabilise unwrapping.};
+  \node[mbox] (quantum) at (4.4,-5.0) {\textbf{Quantum-like}\\Use selectively\\Most defensible on smoother finishing-style regimes and mainly for $S_q$/$S_z$.};
+
+  \node[note] (fallback) at (0,-7.55) {If the regime is unclear, keep \textbf{classical} as the baseline and prefer \textbf{hybrid} over direct coincidence inversion.};
+
+  \draw[line] (start) -- (rmseq);
+  \draw[line] (start) -- (hybq);
+  \draw[line] (start) -- (qq);
+
+  \draw[line] (rmseq) -- (classic);
+  \draw[line] (hybq) -- (hybrid);
+  \draw[line] (qq) -- (quantum);
+
+  \draw[line] (classic.south) -- (fallback.north -| classic);
+  \draw[line] (hybrid.south) -- (fallback.north);
+  \draw[line] (quantum.south) -- (fallback.north -| quantum);
+\end{tikzpicture}

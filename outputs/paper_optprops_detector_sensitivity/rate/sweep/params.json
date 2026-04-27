@@ -1,0 +1,44 @@
+{
+  "params": {
+    "lambda_class_m": 5.32e-07,
+    "lambda1_m": 8.100000000000001e-07,
+    "lambda2_m": 8.09e-07,
+    "lambda_eff_m": 0.0006552899999999508,
+    "nreps": 10,
+    "step_nm": [
+      0.0
+    ],
+    "rms_nm": [
+      80.0
+    ],
+    "phase_step_sigma_deg": 0.0,
+    "background_drift_frac": 0.0,
+    "amplitude_drift_frac": 0.0,
+    "recon": "psi4",
+    "normalize_frames": false,
+    "hybrid_smooth_sigma_px": 1.5,
+    "quant_interferometer": [
+      "noon2"
+    ],
+    "quant_detector_model": "rates",
+    "quant_target_mean_counts": 30000.0,
+    "su11_gain": 0.0,
+    "gate_time_s": 0.001,
+    "pair_rate_hz": 0.0,
+    "eta1": 1.0,
+    "eta2": 1.0,
+    "dark1_hz": 0.0,
+    "dark2_hz": 0.0,
+    "tau_c_s": 0.0,
+    "deadtime1_s": 0.0,
+    "deadtime2_s": 0.0,
+    "sample_reflectivity": [
+      1.0
+    ],
+    "sample_visibility_scale": [
+      1.0
+    ],
+    "coherence_model": "rayleigh",
+    "incidence_cos": 1.0
+  }
+}

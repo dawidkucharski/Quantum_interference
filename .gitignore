@@ -1,0 +1,59 @@
+# macOS
+.DS_Store
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Large local raw inputs kept outside normal Git history
+data/
+quantum_interference.rtf
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+texput.*
+manuscript/%OUTDIR%/
+
+# Office temporary files
+~$*.docx
+
+# Local generated manuscript PDFs
+manuscript/main.pdf
+manuscript/MwTW2026_Abstract_with_figures.pdf
+manuscript/MwTW2026_Submission_Abstract.pdf
+manuscript/texput.pdf
+
+# Local ad hoc reference files
+Scopus - Scopus AI.pdf
+
+# Generated outputs: keep only manuscript-facing paper artefacts
+outputs/*
+!outputs/paper_alicona_benchmark/
+!outputs/paper_alicona_benchmark/**
+!outputs/paper_alicona_example/
+!outputs/paper_alicona_example/**
+!outputs/paper_optprops_quick/
+!outputs/paper_optprops_quick/**
+!outputs/paper_optprops_step_regime/
+!outputs/paper_optprops_step_regime/**
+!outputs/paper_optprops_nonideal_stress/
+!outputs/paper_optprops_nonideal_stress/**
+!outputs/paper_optprops_detector_sensitivity/
+!outputs/paper_optprops_detector_sensitivity/**
+
+# Re-ignore junk inside whitelisted output trees
+outputs/**/.DS_Store
+outputs/**/rebuild.log
+
+# Keep only actual manuscript tables, not smoke-check exports
+manuscript/tables/_smoke_*.tex

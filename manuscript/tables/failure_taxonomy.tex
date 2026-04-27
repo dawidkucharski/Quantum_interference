@@ -1,0 +1,22 @@
+% Reviewer-facing synthesis table for the main failure mechanisms discussed in the paper.
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Failure-mode taxonomy distilled from the measured-surface benchmark and the targeted control experiments. The table is intended as a design-oriented synthesis: it identifies the dominant observable signature, the branch most exposed to the failure mode, the part of the paper where that mode is evidenced, and the corresponding design implication.}
+\label{tab:failure_taxonomy}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{>{\RaggedRight\arraybackslash}p{0.18\textwidth}>{\RaggedRight\arraybackslash}p{0.20\textwidth}>{\RaggedRight\arraybackslash}p{0.13\textwidth}>{\RaggedRight\arraybackslash}p{0.19\textwidth}>{\RaggedRight\arraybackslash}p{0.24\textwidth}}
+\toprule
+Failure mode & Primary signature & Most exposed branch & Evidence in this paper & Design implication \\
+\midrule
+Long-$\Lambda$ texture suppression & Broad residual structures and poor fine-texture recovery despite enlarged ambiguity range & Q-diff, then H-diff & Figure~\ref{fig:alicona_residual_maps}, Table~\ref{tab:classical_two_color_control}, Table~\ref{tab:optprops_lambda_sensitivity} & Treat long-$\Lambda$ information as a coarse prior or envelope cue, not as the primary nm-scale texture estimator. \\
+Ambiguity / unwrap failure & Step-height error rises once the short-wavelength branch must bridge larger discontinuities; direct unwrap choice changes full-dataset medians & Classical direct branch and direct coincidence branches & Table~\ref{tab:benchmark_unwrap_control}, Table~\ref{tab:optprops_step_sensitivity} & Prefer coarse-to-fine hybrid unwrapping or at least verify direct-branch claims against a global unwrap control. \\
+Budget-convention sensitivity & Direct Q-noon2 moves toward or away from the classical floor when the resource normalisation is changed, while the hybrid ordering stays stable & Direct Q-noon2 & Table~\ref{tab:optprops_budget_sensitivity} & Phrase low-light or fair-budget claims as convention-sensitive; do not infer a universal resource advantage from one normalisation. \\
+Frame drift dominance & Background / amplitude drift causes much larger degradation than modest phase-step jitter, but is partly reversible by normalisation & All phase-stepped branches under drift, especially direct estimators & Table~\ref{tab:optprops_nonideal_stress}, Figure~\ref{fig:optprops_nonideal_stress} & Prioritise illumination stabilisation and frame-normalised LSQ reconstruction ahead of only tightening the phase-step actuator. \\
+Detector-side coincidence erosion & Accidentals, efficiency imbalance, and deadtime erode direct coincidence gains before they create a new hybrid win & Direct coincidence branch & Table~\ref{tab:optprops_detector_sensitivity}, Table~\ref{tab:benchmark_rate_model_control} & Propagate detector losses through the design model and judge coincidence channels mainly by whether they still help a hybrid estimator. \\
+Selective envelope-only descriptor gain & Native-grid $S_z$ can look favourable even when descriptor-scaled tolerance exceedance remains high & Direct quantum-like branch & Table~\ref{tab:benchmark_tolerance_rates}, Table~\ref{tab:dominance_summary} & Interpret $S_z$ wins as selective envelope following, not as broad roughness-fidelity improvement. \\
+\bottomrule
+\end{tabular}
+}%
+\end{table}

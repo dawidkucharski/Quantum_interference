@@ -31,7 +31,13 @@ This repository-local manifest records the canonical scripts, inputs, and output
 
 ## Canonical Input Data
 
-- Measured FV topographies: `data/*.sur`
+- Measured FV topographies: local `data/*.sur` files.
+
+## Public Snapshot Policy
+
+- The normal Git-tracked repository snapshot contains the manuscript sources, simulation code, and manuscript-facing generated artefacts.
+- The full local `data/*.sur` set is excluded from normal Git history because the raw dataset is too large for a practical public GitHub snapshot.
+- Raw SUR inputs are available from the corresponding author upon reasonable request.
 
 ## Canonical Output Folders
 
@@ -43,4 +49,4 @@ This repository-local manifest records the canonical scripts, inputs, and output
 ## Notes
 
 - The measured-benchmark workflow now also regenerates representative residual maps, a targeted resolution-sensitivity summary, and an unwrap-control table.
-- Public archival deposition is still pending; until then, this manifest only identifies the local submission snapshot structure.
+- Public archival deposition is still pending; until then, this manifest only identifies the local submission snapshot structure and the lighter Git-tracked public snapshot policy.

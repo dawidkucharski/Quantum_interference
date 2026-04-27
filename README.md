@@ -1,5 +1,10 @@
 # Hybrid quantum-inspired profilometry (simulation)
 
+## Public snapshot note
+The Git-tracked project snapshot is intended to contain the manuscript sources, simulation code, and manuscript-facing generated artefacts.
+
+The raw measured Mountains/DigitalSurf `.sur` files are not included in the normal Git history because the full local dataset is too large for a practical public GitHub snapshot. Commands that reference `data/*.sur` therefore assume local access to those files. The raw SUR inputs can be shared by the corresponding author upon reasonable request.
+
 ## Project aim (paper framing)
 We consider a **rough reflective surface** measured with:
 
@@ -64,12 +69,16 @@ You can also run the same pipeline on a measured Mountains/DigitalSurf `.sur` su
 python scripts/run_demo.py --outdir outputs/demo_sur --surface-sur data/1.4301_szlifowane.sur
 ```
 
+This example requires local access to a `.sur` file, which is not bundled in the Git-tracked public snapshot.
+
 ## Batch processing measured `.sur` surfaces
 If you have many measured surfaces in `data/` (different materials / treatments), you can generate a single metrics table:
 
 ```bash
 python scripts/process_surfaces_sur.py --outdir outputs/surfaces_summary --nx 256 --ny 256
 ```
+
+As above, this workflow requires local access to the raw `.sur` dataset.
 
 This writes:
 - `outputs/surfaces_summary/summary.csv` (one row per `.sur` file)

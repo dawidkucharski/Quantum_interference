@@ -9,7 +9,8 @@ __pycache__/
 .mypy_cache/
 
 # Large local raw inputs kept outside normal Git history
-data/
+data/**
+!data/README.md
 quantum_interference.rtf
 
 # LaTeX build artifacts

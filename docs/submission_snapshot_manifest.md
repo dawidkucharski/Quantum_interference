@@ -64,7 +64,7 @@ This repository-local manifest records the canonical scripts, inputs, output fol
 - Generator: `scripts/make_q1_reproducibility_package.py`
 - Bundle: `outputs/submission_archive/quantum_interference_reproducibility_submission-2026-04-28-q1.tar.gz`
 - Checksum: `outputs/submission_archive/quantum_interference_reproducibility_submission-2026-04-28-q1.tar.gz.sha256`
-- SHA-256: `cbe60dc49cbe5d8b6c7253a05e3118fde4e86420e9d180a28c37979ba37bc83f`
+- SHA-256: `bad910d14fd64b3f38924b8fc69cf9dd71ef5d6befba8b23f5f1a22e8b917698`
 - Contents: derived 256 x 256 benchmark-grid surfaces (`benchmark_grid_surfaces_256.npz`), benchmark-grid manifest, public CSV outputs, generated manuscript table sources, submission-support docs, exact regeneration commands, and Python environment summary. Raw native-resolution `data/*.sur` files are intentionally excluded.
 
 ## Legacy Local Bundle

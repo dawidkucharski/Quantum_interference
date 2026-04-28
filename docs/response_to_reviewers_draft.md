@@ -4,7 +4,7 @@
 
 Dear Editor and Reviewers,
 
-Thank you for the careful evaluation of our manuscript, now titled "Hybrid Coarse-to-Fine Profilometry for Rough Surfaces: A Pre-Validation Coincidence-Proxy Benchmark on FV-Derived Surface Topographies".
+Thank you for the careful evaluation of our manuscript, now titled "Simulation benchmark of hybrid coarse-to-fine interferometric profilometry using coincidence-proxy priors on measured rough surfaces".
 
 The revision strategy was not to defend the earlier stronger framing. Instead, we narrowed the manuscript to the portion of the evidence that remains technically defensible. In particular, the revised paper now presents the measured-surface branch as a pre-validation internal-consistency benchmark rather than as external metrological validation; it uses matched-bandwidth benchmark-grid roughness as the only primary manuscript basis; it states explicitly that PSD agreement is only a shared-prior diagnostic; it shows that the surviving direct long-wavelength effect is not uniquely quantum once stronger classical controls are included; and it makes the remaining closure requirements explicit, namely independent reference measurements, archival deposition, and reduced experimental validation before any stronger claim is advanced.
 

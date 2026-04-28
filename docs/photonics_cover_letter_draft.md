@@ -7,7 +7,7 @@ Photonics
 
 Dear Editor,
 
-I am pleased to submit the manuscript titled "Simulation Benchmark of Hybrid Coarse-to-Fine Interferometric Profilometry Using Coincidence-Proxy Priors on Measured Rough Surfaces" for consideration in Photonics.
+I am pleased to submit the manuscript titled "Simulation benchmark of hybrid coarse-to-fine interferometric profilometry using coincidence-proxy priors on measured rough surfaces" for consideration in Photonics.
 
 This manuscript presents a reproducible simulation benchmark for photonic-instrumentation architecture selection in rough-surface profilometry. It compares classical phase-shifting interferometry, direct coincidence-proxy channels, and hybrid coarse-to-fine reconstruction under matched detected-count assumptions using 59 focus-variation (FV) surface topographies exported as Mountains/DigitalSurf `.sur` files as measured geometric priors. The main result is an architecture-level height-fidelity finding: within the present proxy hierarchy, coincidence-derived information is most valuable as a coarse ambiguity-resolving prior inside a hybrid estimator when benchmark-grid height RMSE is the primary endpoint.
 

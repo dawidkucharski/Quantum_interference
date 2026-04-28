@@ -143,7 +143,7 @@ This companion package is intentionally derived-data only. It does not include t
 - `benchmark_grid_manifest.csv`: one row per downsampled benchmark surface with group labels, lateral sampling, field of view, valid-pixel fraction, and height range.
 - `derived_csv/`: public CSV outputs copied from `outputs/paper_alicona_benchmark/`, including per-surface benchmark rows and control summaries.
 - `manuscript_tables/`: generated manuscript table sources used by the paper.
-- `support_docs/`: submission manifest and experimental-validation protocol.
+- `support_docs/`: public experimental-validation protocol.
 - `commands.txt`: exact full-regeneration and smoke-test commands.
 - `environment.txt`: Python interpreter and package requirements used for this package.
 
@@ -309,7 +309,7 @@ def _copy_public_outputs(asset_dir: Path) -> None:
 
     docs_root = asset_dir / "support_docs"
     docs_root.mkdir(parents=True, exist_ok=True)
-    for doc_name in ["submission_snapshot_manifest.md", "experimental_validation_protocol.md", "photonics_cover_letter_draft.md"]:
+    for doc_name in ["experimental_validation_protocol.md"]:
         source = ROOT / "docs" / doc_name
         if source.exists():
             shutil.copy2(source, docs_root / doc_name)

@@ -37,6 +37,13 @@ manuscript/texput.pdf
 # Local ad hoc reference files
 Scopus - Scopus AI.pdf
 
+# Private submission/admin files kept local only
+private_submission/
+docs/photonics_cover_letter_draft.md
+docs/response_to_reviewers_draft.md
+docs/submission_snapshot_manifest.md
+manuscript/MwTW2026_Abstract_with_figures.tex
+
 # Generated outputs: keep only manuscript-facing paper artefacts
 outputs/*
 !outputs/paper_alicona_benchmark/

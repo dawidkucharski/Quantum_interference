@@ -15,7 +15,7 @@ This companion package is intentionally derived-data only. It does not include t
 - `benchmark_grid_manifest.csv`: one row per downsampled benchmark surface with group labels, lateral sampling, field of view, valid-pixel fraction, and height range.
 - `derived_csv/`: public CSV outputs copied from `outputs/paper_alicona_benchmark/`, including per-surface benchmark rows and control summaries.
 - `manuscript_tables/`: generated manuscript table sources used by the paper.
-- `support_docs/`: submission manifest and experimental-validation protocol.
+- `support_docs/`: public experimental-validation protocol.
 - `commands.txt`: exact full-regeneration and smoke-test commands.
 - `environment.txt`: Python interpreter and package requirements used for this package.
 

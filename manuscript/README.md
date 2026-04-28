@@ -33,7 +33,7 @@ Canonical paper workflows live in the repository root:
 - `scripts/make_nonideal_stress_artifacts.py` regenerates the representative robustness figure/table from summary CSVs.
 - `scripts/run_paper_detector_sensitivity.py` regenerates the targeted detector-model sensitivity figure/table.
 
-The repository-local submission structure is indexed in `docs/submission_snapshot_manifest.md`; it is a traceability aid inside the working tree, not a public archival deposition.
+The public reproducibility companion is indexed in `docs/reproducibility_companion.md`.
 
 TikZ optical layouts are in:
 - `manuscript/figures/tikz_layouts.tex`

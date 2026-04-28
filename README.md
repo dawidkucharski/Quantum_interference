@@ -237,7 +237,7 @@ python scripts/run_paper_resolution_sensitivity.py --tag paper_alicona_benchmark
 python scripts/run_paper_unwrap_control.py --tag paper_alicona_benchmark
 ```
 
-The current repository-local submission structure is indexed in `docs/submission_snapshot_manifest.md`.
+The public reproducibility companion is indexed in `docs/reproducibility_companion.md`.
 
 The AI selection artefacts can also be refreshed directly from an existing measured benchmark:
 

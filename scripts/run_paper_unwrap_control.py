@@ -60,9 +60,9 @@ def _collapse_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, float |
                 "stem": stem,
                 "method": method,
                 "height_rmse_nm": float(np.median([float(e["height_rmse_nm"]) for e in entries])),
-                "abs_bias_Sa_nm": float(np.median([abs(float(e["bias_Sa_nm"])) for e in entries])),
-                "abs_bias_Sq_nm": float(np.median([abs(float(e["bias_Sq_nm"])) for e in entries])),
-                "abs_bias_Sz_nm": float(np.median([abs(float(e["bias_Sz_nm"])) for e in entries])),
+                "abs_bias_Sa_nm": float(np.median([abs(float(e["bias_Sa_bw_nm"])) for e in entries])),
+                "abs_bias_Sq_nm": float(np.median([abs(float(e["bias_Sq_bw_nm"])) for e in entries])),
+                "abs_bias_Sz_nm": float(np.median([abs(float(e["bias_Sz_bw_nm"])) for e in entries])),
             }
         )
     return out
@@ -103,13 +103,13 @@ def _write_latex_table(path: Path, *, label: str, simple: dict[str, dict[str, fl
         "\\centering",
         "\\footnotesize",
         "\\setlength{\\tabcolsep}{4pt}",
-        "\\caption{Measured-surface unwrapping control over the full benchmark dataset. Direct classical and quantum-like branches are rerun with a global least-squares Poisson unwrap instead of the default separable row/column unwrap; entries report surface-level medians after collapsing repeated runs within each surface and method. The hybrid branch is unchanged because it uses the coincidence-derived coarse prior directly for fringe-order assignment.}",
+        "\\caption{Measured-surface unwrapping control over the full benchmark dataset. Direct classical and coincidence-proxy branches are rerun with a global least-squares Poisson unwrap instead of the default separable row/column unwrap; entries report surface-level medians after collapsing repeated runs within each surface and method. Roughness endpoints use the matched-bandwidth benchmark-grid reference. The hybrid branch is unchanged because it uses the coincidence-derived coarse prior directly for fringe-order assignment.}",
         f"\\label{{{label}}}",
         "\\resizebox{\\textwidth}{!}{%",
-        "\\begin{tabular}{lccccc}",
-        "\\toprule",
-        "Endpoint & Classical (simple) & Classical (least-squares) & Quantum-like (simple) & Quantum-like (least-squares) & Hybrid \\\\",
-        "\\midrule",
+          "\\begin{tabular}{lccccc}",
+          "\\toprule",
+          "Endpoint & Classical (simple) & Classical (least-squares) & Coincidence-proxy (simple) & Coincidence-proxy (least-squares) & Hybrid " + chr(92) + chr(92),
+          "\\midrule",
         f"Height RMSE (nm) & {_fmt(simple['classical']['height_rmse_nm'])} & {_fmt(least_squares['classical']['height_rmse_nm'])} & {_fmt(simple['quantum_like']['height_rmse_nm'])} & {_fmt(least_squares['quantum_like']['height_rmse_nm'])} & {_fmt(simple['hybrid']['height_rmse_nm'])} \\\\",
         f"$|\\Delta S_a|$ (nm) & {_fmt(simple['classical']['abs_bias_Sa_nm'])} & {_fmt(least_squares['classical']['abs_bias_Sa_nm'])} & {_fmt(simple['quantum_like']['abs_bias_Sa_nm'])} & {_fmt(least_squares['quantum_like']['abs_bias_Sa_nm'])} & {_fmt(simple['hybrid']['abs_bias_Sa_nm'])} \\\\",
         f"$|\\Delta S_q|$ (nm) & {_fmt(simple['classical']['abs_bias_Sq_nm'])} & {_fmt(least_squares['classical']['abs_bias_Sq_nm'])} & {_fmt(simple['quantum_like']['abs_bias_Sq_nm'])} & {_fmt(least_squares['quantum_like']['abs_bias_Sq_nm'])} & {_fmt(simple['hybrid']['abs_bias_Sq_nm'])} \\\\",
@@ -162,7 +162,7 @@ def main() -> None:
             "--ny",
             str(int(args.ny)),
             "--nreps",
-            str(int(args.nreps)),
+                  "Endpoint & Classical (simple) & Classical (least-squares) & Coincidence-proxy (simple) & Coincidence-proxy (least-squares) & Hybrid " + chr(92) + chr(92),
         ]
         if int(args.limit) > 0:
             cmd.extend(["--limit", str(int(args.limit))])

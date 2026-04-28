@@ -53,14 +53,20 @@ def _collapse_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, object]
     numeric_keys = [
         "height_rmse_nm",
         "Sq_true_nm",
+        "Sq_true_bw_nm",
         "Sa_true_nm",
+        "Sa_true_bw_nm",
         "Sa_est_nm",
         "Sq_est_nm",
         "Sz_true_nm",
+        "Sz_true_bw_nm",
         "Sz_est_nm",
         "bias_Sa_nm",
+        "bias_Sa_bw_nm",
         "bias_Sq_nm",
+        "bias_Sq_bw_nm",
         "bias_Sz_nm",
+        "bias_Sz_bw_nm",
     ]
     out: list[dict[str, object]] = []
     for (stem, method), entries in sorted(grouped.items()):
@@ -97,7 +103,7 @@ def _series_by_method(rows: list[dict[str, str]]) -> list[MethodSeries]:
     return out
 
 
-def _roughness_by_method(rows: list[dict[str, str]]) -> list[RoughnessSeries]:
+def _roughness_by_method(rows: list[dict[str, str]], *, true_suffix: str) -> list[RoughnessSeries]:
     methods = _method_order({r["method"] for r in rows})
     out: list[RoughnessSeries] = []
     for method in methods:
@@ -105,11 +111,11 @@ def _roughness_by_method(rows: list[dict[str, str]]) -> list[RoughnessSeries]:
         out.append(
             RoughnessSeries(
                 method=method,
-                sa_true_nm=np.array([float(r["Sa_true_nm"]) for r in mrows], dtype=float),
+                sa_true_nm=np.array([float(r[f"Sa_true{true_suffix}_nm"]) for r in mrows], dtype=float),
                 sa_est_nm=np.array([float(r["Sa_est_nm"]) for r in mrows], dtype=float),
-                sq_true_nm=np.array([float(r["Sq_true_nm"]) for r in mrows], dtype=float),
+                sq_true_nm=np.array([float(r[f"Sq_true{true_suffix}_nm"]) for r in mrows], dtype=float),
                 sq_est_nm=np.array([float(r["Sq_est_nm"]) for r in mrows], dtype=float),
-                sz_true_nm=np.array([float(r["Sz_true_nm"]) for r in mrows], dtype=float),
+                sz_true_nm=np.array([float(r[f"Sz_true{true_suffix}_nm"]) for r in mrows], dtype=float),
                 sz_est_nm=np.array([float(r["Sz_est_nm"]) for r in mrows], dtype=float),
             )
         )
@@ -119,7 +125,7 @@ def _roughness_by_method(rows: list[dict[str, str]]) -> list[RoughnessSeries]:
 def _method_label(method: str) -> str:
     return {
         "classical": "Classical",
-        "quantum_like": "Quantum-like",
+        "quantum_like": "Coincidence-proxy",
         "hybrid": "Hybrid",
     }.get(method, method)
 
@@ -227,17 +233,17 @@ def _positive_limits(series: list[RoughnessSeries], attr_true: str, attr_est: st
     return lo * 0.8, hi * 1.25
 
 
-def _plot_roughness(outpath: Path, series: list[RoughnessSeries]) -> None:
+def _plot_roughness(outpath: Path, series: list[RoughnessSeries], *, reference_label: str) -> None:
     import matplotlib.pyplot as plt
 
     outpath.parent.mkdir(parents=True, exist_ok=True)
     apply_publication_style(base_fontsize=8.5)
 
-    fig, axes = plt.subplots(1, 3, figsize=(6.77, 2.55), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(6.77, 2.9), constrained_layout=True)
     panels = [
-        ("Sa", "sa_true_nm", "sa_est_nm"),
-        ("Sq", "sq_true_nm", "sq_est_nm"),
-        ("Sz", "sz_true_nm", "sz_est_nm"),
+        (r"(a) $S_a$", "sa_true_nm", "sa_est_nm"),
+        (r"(b) $S_q$", "sq_true_nm", "sq_est_nm"),
+        (r"(c) $S_z$", "sz_true_nm", "sz_est_nm"),
     ]
 
     for ax, (label, attr_true, attr_est) in zip(axes, panels):
@@ -258,11 +264,11 @@ def _plot_roughness(outpath: Path, series: list[RoughnessSeries]) -> None:
         ax.set_yscale("log")
         ax.set_xlim(lo, hi)
         ax.set_ylim(lo, hi)
-        ax.set_title(f"({label}) Estimated vs FV reference")
-        ax.set_xlabel(f"FV {label} (nm) [log]")
+        ax.set_title(label)
         ax.grid(True, which="both", alpha=0.25)
 
-    axes[0].set_ylabel("Estimated parameter (nm) [log]")
+    fig.supxlabel(f"{reference_label.capitalize()} parameter (nm) [log]")
+    fig.supylabel("Estimated parameter (nm) [log]")
     handles, labels = axes[0].get_legend_handles_labels()
     if handles:
         axes[-1].legend(handles, labels, frameon=False, loc="lower right")
@@ -271,7 +277,13 @@ def _plot_roughness(outpath: Path, series: list[RoughnessSeries]) -> None:
     plt.close(fig)
 
 
-def _plot_roughness_bland_altman(outpath: Path, rows: list[dict[str, str]]) -> None:
+def _plot_roughness_bland_altman(
+    outpath: Path,
+    rows: list[dict[str, str]],
+    *,
+    true_suffix: str,
+    reference_label: str,
+) -> None:
     import matplotlib.pyplot as plt
 
     outpath.parent.mkdir(parents=True, exist_ok=True)
@@ -279,11 +291,11 @@ def _plot_roughness_bland_altman(outpath: Path, rows: list[dict[str, str]]) -> N
 
     collapsed = _collapse_surface_rows(rows)
     methods = _method_order({str(row["method"]) for row in collapsed})
-    fig, axes = plt.subplots(1, 3, figsize=(6.77, 2.55), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(6.77, 2.9), constrained_layout=True)
     panels = [
-        ("Sa", "Sa_true_nm", "Sa_est_nm"),
-        ("Sq", "Sq_true_nm", "Sq_est_nm"),
-        ("Sz", "Sz_true_nm", "Sz_est_nm"),
+        (r"(a) $S_a$ bias", f"Sa_true{true_suffix}_nm", "Sa_est_nm"),
+        (r"(b) $S_q$ bias", f"Sq_true{true_suffix}_nm", "Sq_est_nm"),
+        (r"(c) $S_z$ bias", f"Sz_true{true_suffix}_nm", "Sz_est_nm"),
     ]
 
     for ax, (label, true_key, est_key) in zip(axes, panels):
@@ -326,11 +338,11 @@ def _plot_roughness_bland_altman(outpath: Path, rows: list[dict[str, str]]) -> N
             if y_span <= 0.0:
                 y_span = float(np.max(np.abs(merged_y))) if merged_y.size else 1.0
             ax.set_ylim(-1.15 * y_span, 1.15 * y_span)
-        ax.set_title(f"({label}) Bias vs mean level")
-        ax.set_xlabel(f"Mean of estimate and FV {label} (nm) [log]")
+        ax.set_title(label)
         ax.grid(True, which="both", alpha=0.25)
 
-    axes[0].set_ylabel("Estimated $-$ FV reference (nm)")
+    fig.supxlabel(f"Mean of estimate and {reference_label} (nm) [log]")
+    fig.supylabel(f"Estimated $-$ {reference_label} (nm)")
     handles, labels = axes[0].get_legend_handles_labels()
     if handles:
         axes[-1].legend(handles, labels, frameon=False, loc="upper left")
@@ -339,7 +351,13 @@ def _plot_roughness_bland_altman(outpath: Path, rows: list[dict[str, str]]) -> N
     plt.close(fig)
 
 
-def _plot_roughness_by_treatment(outpath: Path, rows: list[dict[str, str]]) -> None:
+def _plot_roughness_by_treatment(
+    outpath: Path,
+    rows: list[dict[str, str]],
+    *,
+    bias_suffix: str,
+    reference_label: str,
+) -> None:
     import matplotlib.pyplot as plt
 
     outpath.parent.mkdir(parents=True, exist_ok=True)
@@ -361,7 +379,7 @@ def _plot_roughness_by_treatment(outpath: Path, rows: list[dict[str, str]]) -> N
             ys: list[float] = []
             for treatment in treatments:
                 vals = [
-                    abs(float(r[f"bias_{metric}_nm"]))
+                    abs(float(r[f"bias_{metric}{bias_suffix}_nm"]))
                     for r in rows
                     if r["treatment"] == treatment and r["method"] == method
                 ]
@@ -373,7 +391,7 @@ def _plot_roughness_by_treatment(outpath: Path, rows: list[dict[str, str]]) -> N
         ax.set_ylabel(ylabel)
         ax.grid(True, which="both", axis="y", alpha=0.25)
 
-    axes[0].set_title("Per-treatment roughness error on FV surfaces")
+    axes[0].set_title(f"Per-treatment roughness error against {reference_label}")
     axes[0].legend(frameon=False, ncol=3, loc="upper left")
     axes[-1].set_xticks(x, [_treatment_label(g) for g in treatments], rotation=24, ha="right")
     axes[-1].set_xlabel("Surface treatment")
@@ -391,7 +409,7 @@ def _plot_pairwise_method_comparison(outpath: Path, rows: list[dict[str, str]]) 
     surface_map = _collapsed_method_map(rows)
     paired_keys = [
         ("classical", "hybrid", "(a) Hybrid vs classical"),
-        ("quantum_like", "hybrid", "(b) Hybrid vs quantum-like"),
+        ("quantum_like", "hybrid", "(b) Hybrid vs coincidence-proxy"),
     ]
 
     fig, axes = plt.subplots(1, 3, figsize=(6.77, 2.85), constrained_layout=True)
@@ -438,7 +456,9 @@ def _plot_pairwise_method_comparison(outpath: Path, rows: list[dict[str, str]]) 
         if "hybrid" not in method_map:
             continue
         if "classical" in method_map:
-            sq_vals.append(float(str(method_map["hybrid"]["Sq_true_nm"])))
+            sq_vals.append(
+                float(str(method_map["hybrid"].get("Sq_true_bw_nm", method_map["hybrid"]["Sq_true_nm"])))
+            )
             gain_hc.append(
                 float(str(method_map["hybrid"]["height_rmse_nm"]))
                 - float(str(method_map["classical"]["height_rmse_nm"]))
@@ -468,12 +488,12 @@ def _plot_pairwise_method_comparison(outpath: Path, rows: list[dict[str, str]]) 
         s=15,
         alpha=0.74,
         color="#b56576",
-        label="Hybrid - Quantum-like",
+        label="Hybrid - Coincidence-proxy",
     )
     predictor_ax.axhline(0.0, color="0.35", linestyle="--", linewidth=0.9)
     predictor_ax.set_xscale("log")
-    predictor_ax.set_title("(c) Hybrid gain vs FV $S_q$")
-    predictor_ax.set_xlabel("FV $S_q$ (nm) [log]")
+    predictor_ax.set_title("(c) Hybrid gain vs benchmark-grid $S_q$")
+    predictor_ax.set_xlabel("Benchmark-grid $S_q$ (nm) [log]")
     predictor_ax.set_ylabel("RMSE difference (nm)")
     predictor_ax.grid(True, which="both", alpha=0.25)
     predictor_ax.legend(frameon=False, loc="upper right")
@@ -522,22 +542,49 @@ def main() -> int:
         default=Path("outputs/paper_alicona_benchmark/figures/paired_method_comparison.pdf"),
         help="Output path for the paired per-surface RMSE comparison figure (.pdf recommended for LaTeX)",
     )
+    ap.add_argument(
+        "--roughness-suffix",
+        type=str,
+        default="",
+        help="Optional suffix selecting alternate roughness reference columns, e.g. '_bw' for matched-bandwidth fields.",
+    )
+    ap.add_argument(
+        "--roughness-reference-label",
+        type=str,
+        default="FV reference",
+        help="Human-readable label for the roughness-reference domain used in figure titles and axis labels.",
+    )
     args = ap.parse_args()
 
     rows = _load_per_surface_csv(args.per_surface)
     for k in ("method", "height_rmse_nm", "Sq_true_nm"):
         if k not in rows[0]:
             raise ValueError(f"Missing column {k!r} in {args.per_surface}")
-    for k in ("Sa_true_nm", "Sa_est_nm", "Sq_est_nm", "Sz_true_nm", "Sz_est_nm"):
+    true_suffix = str(args.roughness_suffix)
+    for k in (f"Sa_true{true_suffix}_nm", "Sa_est_nm", f"Sq_true{true_suffix}_nm", "Sq_est_nm", f"Sz_true{true_suffix}_nm", "Sz_est_nm"):
         if k not in rows[0]:
             raise ValueError(f"Missing column {k!r} in {args.per_surface}")
 
     series = _series_by_method(rows)
-    roughness = _roughness_by_method(rows)
+    roughness = _roughness_by_method(rows, true_suffix=true_suffix)
     _plot(args.out, series)
-    _plot_roughness(args.roughness_out, roughness)
-    _plot_roughness_bland_altman(args.roughness_bias_out, rows)
-    _plot_roughness_by_treatment(args.roughness_by_treatment_out, rows)
+    _plot_roughness(
+        args.roughness_out,
+        roughness,
+        reference_label=str(args.roughness_reference_label),
+    )
+    _plot_roughness_bland_altman(
+        args.roughness_bias_out,
+        rows,
+        true_suffix=true_suffix,
+        reference_label=str(args.roughness_reference_label),
+    )
+    _plot_roughness_by_treatment(
+        args.roughness_by_treatment_out,
+        rows,
+        bias_suffix=true_suffix,
+        reference_label=str(args.roughness_reference_label),
+    )
     _plot_pairwise_method_comparison(args.pairwise_out, rows)
     print(f"Wrote: {args.out}")
     print(f"Wrote: {args.roughness_out}")

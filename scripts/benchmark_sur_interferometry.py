@@ -134,6 +134,11 @@ class BenchmarkConfig:
     quant_pairs: float
     gate_time_s: float
     pair_rate_hz: float
+    phase_step_error_sigma_rad: float
+    background_drift_frac: float
+    amplitude_drift_frac: float
+    roughness_s_filter_m: float
+    roughness_l_filter_m: float
     eta1: float
     eta2: float
     dark1_hz: float
@@ -166,8 +171,21 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
         fill = float(np.nanmedian(h_true[valid_mask]))
         h_true = np.where(valid_mask, h_true, fill)
 
+    dx = float(np.mean(np.diff(surface.x))) if surface.x.size >= 2 else 1.0
+    dy = float(np.mean(np.diff(surface.y))) if surface.y.size >= 2 else 1.0
+
     true_m_native = roughness_metrics_sur_reference(p)
     true_m_bw = roughness_metrics(surface.h, valid_mask=valid_mask)
+    true_m_iso = None
+    if float(config.roughness_s_filter_m) > 0.0 or float(config.roughness_l_filter_m) > 0.0:
+        true_m_iso = roughness_metrics(
+            surface.h,
+            valid_mask=valid_mask,
+            dx=dx,
+            dy=dy,
+            s_filter_m=float(config.roughness_s_filter_m),
+            l_filter_m=float(config.roughness_l_filter_m),
+        )
     pair_rate_hz = None
     if str(config.quant_detector_model) == "rates":
         pair_rate_hz = (
@@ -187,6 +205,9 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
             wavelength_m=float(config.lambda_class_m),
             photons_per_pixel=float(config.class_photons),
             visibility=float(config.class_visibility),
+            phase_step_error_sigma_rad=float(config.phase_step_error_sigma_rad),
+            background_drift_frac=float(config.background_drift_frac),
+            amplitude_drift_frac=float(config.amplitude_drift_frac),
             seed=class_seed,
         )
         if config.recon == "lsq":
@@ -220,6 +241,9 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
                 float(config.quant_target_mean_counts) if float(config.quant_target_mean_counts) > 0 else None
             ),
             su11_gain=float(config.su11_gain),
+            phase_step_error_sigma_rad=float(config.phase_step_error_sigma_rad),
+            background_drift_frac=float(config.background_drift_frac),
+            amplitude_drift_frac=float(config.amplitude_drift_frac),
             seed=quant_seed,
         )
         if config.recon == "lsq":
@@ -247,6 +271,18 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
             m_est = roughness_metrics(h_est, valid_mask=valid_mask)
             errs_native = roughness_errors(m_est, true_m_native)
             errs_bw = roughness_errors(m_est, true_m_bw)
+            if true_m_iso is not None:
+                m_est_iso = roughness_metrics(
+                    h_est,
+                    valid_mask=valid_mask,
+                    dx=dx,
+                    dy=dy,
+                    s_filter_m=float(config.roughness_s_filter_m),
+                    l_filter_m=float(config.roughness_l_filter_m),
+                )
+                errs_iso = roughness_errors(m_est_iso, true_m_iso)
+            else:
+                errs_iso = None
             rows.append(
                 {
                     "file": str(p.as_posix()),
@@ -262,6 +298,9 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
                     "lambda1_nm": float(config.lambda1_m * 1e9),
                     "lambda2_nm": float(config.lambda2_m * 1e9),
                     "lambda_eff_nm": float(config.lambda_eff_m * 1e9),
+                    "phase_step_sigma_deg": float(np.rad2deg(config.phase_step_error_sigma_rad)),
+                    "background_drift_frac": float(config.background_drift_frac),
+                    "amplitude_drift_frac": float(config.amplitude_drift_frac),
                     "deadtime1_s": float(config.deadtime1_s),
                     "deadtime2_s": float(config.deadtime2_s),
                     "Sa_true_nm": float(true_m_native.Sa * 1e9),
@@ -270,6 +309,9 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
                     "Sa_true_bw_nm": float(true_m_bw.Sa * 1e9),
                     "Sq_true_bw_nm": float(true_m_bw.Sq * 1e9),
                     "Sz_true_bw_nm": float(true_m_bw.Sz * 1e9),
+                    "Sa_true_iso_nm": float(true_m_iso.Sa * 1e9) if true_m_iso is not None else "",
+                    "Sq_true_iso_nm": float(true_m_iso.Sq * 1e9) if true_m_iso is not None else "",
+                    "Sz_true_iso_nm": float(true_m_iso.Sz * 1e9) if true_m_iso is not None else "",
                     "Sa_est_nm": float(m_est.Sa * 1e9),
                     "Sq_est_nm": float(m_est.Sq * 1e9),
                     "Sz_est_nm": float(m_est.Sz * 1e9),
@@ -279,6 +321,9 @@ def _process_surface(path_str: str, config: BenchmarkConfig) -> List[Dict[str, o
                     "bias_Sa_bw_nm": float(errs_bw["bias_Sa"] * 1e9),
                     "bias_Sq_bw_nm": float(errs_bw["bias_Sq"] * 1e9),
                     "bias_Sz_bw_nm": float(errs_bw["bias_Sz"] * 1e9),
+                    "bias_Sa_iso_nm": float(errs_iso["bias_Sa"] * 1e9) if errs_iso is not None else "",
+                    "bias_Sq_iso_nm": float(errs_iso["bias_Sq"] * 1e9) if errs_iso is not None else "",
+                    "bias_Sz_iso_nm": float(errs_iso["bias_Sz"] * 1e9) if errs_iso is not None else "",
                     "height_rmse_nm": _rmse_nm(h_est, h_true, valid_mask=valid_mask),
                 }
             )
@@ -321,6 +366,11 @@ def main() -> None:
     ap.add_argument("--quant-pairs", type=float, default=3e4)
     ap.add_argument("--gate-time-s", type=float, default=1.0)
     ap.add_argument("--pair-rate-hz", type=float, default=0.0)
+    ap.add_argument("--phase-step-sigma-deg", type=float, default=0.0)
+    ap.add_argument("--background-drift-frac", type=float, default=0.0)
+    ap.add_argument("--amplitude-drift-frac", type=float, default=0.0)
+    ap.add_argument("--roughness-s-filter-um", type=float, default=0.0)
+    ap.add_argument("--roughness-l-filter-um", type=float, default=0.0)
     ap.add_argument("--eta1", type=float, default=1.0)
     ap.add_argument("--eta2", type=float, default=1.0)
     ap.add_argument("--dark1-hz", type=float, default=0.0)
@@ -377,6 +427,11 @@ def main() -> None:
         quant_pairs=float(args.quant_pairs),
         gate_time_s=float(args.gate_time_s),
         pair_rate_hz=float(args.pair_rate_hz),
+        phase_step_error_sigma_rad=float(np.deg2rad(args.phase_step_sigma_deg)),
+        background_drift_frac=float(args.background_drift_frac),
+        amplitude_drift_frac=float(args.amplitude_drift_frac),
+        roughness_s_filter_m=float(args.roughness_s_filter_um) * 1e-6,
+        roughness_l_filter_m=float(args.roughness_l_filter_um) * 1e-6,
         eta1=float(args.eta1),
         eta2=float(args.eta2),
         dark1_hz=float(args.dark1_hz),

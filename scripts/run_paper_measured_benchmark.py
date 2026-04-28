@@ -64,6 +64,8 @@ def main() -> None:
     ap.add_argument("--skip-resolution-sensitivity", action="store_true")
     ap.add_argument("--skip-unwrap-control", action="store_true")
     ap.add_argument("--skip-rate-model-control", action="store_true")
+    ap.add_argument("--skip-nonideal-control", action="store_true")
+    ap.add_argument("--skip-roughness-filter-control", action="store_true")
     ap.add_argument("--skip-classical-frontier", action="store_true")
     ap.add_argument("--skip-surface-metadata", action="store_true")
     args = ap.parse_args()
@@ -112,6 +114,10 @@ def main() -> None:
             str(out_base / "figures" / "roughness_measured_by_treatment.pdf"),
             "--pairwise-out",
             str(out_base / "figures" / "paired_method_comparison.pdf"),
+            "--roughness-suffix",
+            "_bw",
+            "--roughness-reference-label",
+            "benchmark-grid reference",
         ]
     )
 
@@ -205,6 +211,8 @@ def main() -> None:
             "tab:alicona_roughness_median_abs",
             "--digits",
             "1",
+            "--caption",
+            "Native-grid diagnostic stress test for the measured-surface benchmark: median absolute roughness-parameter error relative to roughness values computed on the native FV \\texttt{.sur} height maps after masking explicit invalid pixels and removing a best-fit plane. This comparison is intentionally stricter than the forward-model bandwidth and is retained as a reference-sensitivity diagnostic rather than as the primary roughness ranking.",
         ]
     )
 
@@ -245,6 +253,27 @@ def main() -> None:
             str(root / "manuscript" / "tables" / "benchmark_holdout_treatment.tex"),
         ]
     )
+
+    if not args.skip_roughness_filter_control:
+        _run(
+            [
+                py,
+                str(root / "scripts" / "run_paper_roughness_filter_control.py"),
+                *expanded_inputs,
+                "--baseline-per-surface",
+                str(per_surface),
+                "--tag",
+                str(args.tag),
+                "--nx",
+                str(int(args.nx)),
+                "--ny",
+                str(int(args.ny)),
+                "--nreps",
+                str(int(args.nreps)),
+                "--jobs",
+                str(int(args.jobs)),
+            ]
+        )
 
     if not args.skip_surface_metadata:
         _run(
@@ -373,6 +402,25 @@ def main() -> None:
             [
                 py,
                 str(root / "scripts" / "run_paper_measured_rate_control.py"),
+                *expanded_inputs,
+                "--tag",
+                str(args.tag),
+                "--nx",
+                str(int(args.nx)),
+                "--ny",
+                str(int(args.ny)),
+                "--nreps",
+                str(int(args.control_nreps)),
+                "--jobs",
+                str(int(args.jobs)),
+            ]
+        )
+
+    if not args.skip_nonideal_control:
+        _run(
+            [
+                py,
+                str(root / "scripts" / "run_paper_measured_nonideal_control.py"),
                 *expanded_inputs,
                 "--tag",
                 str(args.tag),

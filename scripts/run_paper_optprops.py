@@ -117,7 +117,7 @@ def main() -> None:
             "--label",
             "tab:optprops_rmse_step0",
             "--caption",
-            "Height RMSE (after plane detrending) for step-free surfaces. Entries are mean $\\pm$ std over repeats; columns compare classical PSI with quantum-like and hybrid pipelines for different interferometer models.",
+            "Height RMSE (after plane detrending) for step-free surfaces. Entries are mean $\\pm$ std over repeats; columns compare classical PSI with coincidence-proxy and hybrid pipelines for different interferometer models.",
         ]
     )
 

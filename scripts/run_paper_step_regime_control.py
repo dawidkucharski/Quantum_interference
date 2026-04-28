@@ -158,7 +158,7 @@ def _plot(path: Path, rows: list[dict[str, float | str]]) -> None:
         "hybrid_noon2": "#2a9d8f",
     }
 
-    fig, axes = plt.subplots(1, len(SCENARIOS), figsize=(8.2, 3.0), constrained_layout=True, sharey=True)
+    fig, axes = plt.subplots(1, len(SCENARIOS), figsize=(8.2, 3.2), constrained_layout=False, sharey=True)
     if len(SCENARIOS) == 1:
         axes = [axes]
 
@@ -188,12 +188,24 @@ def _plot(path: Path, rows: list[dict[str, float | str]]) -> None:
             f"{scenario['label']}\n$R={float(scenario['sample_reflectivity']):.2f}$, "
             f"$V_\\mathrm{{scale}}={float(scenario['sample_visibility_scale']):.2f}$",
             fontsize=8.5,
+            pad=6.0,
         )
         ax.set_xlabel("Step height (nm)")
         ax.grid(True, alpha=0.25)
     axes[0].set_ylabel("Absolute step-height error (nm)")
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, frameon=False, ncol=3, loc="upper center")
+    fig.legend(
+        handles,
+        labels,
+        frameon=False,
+        ncol=len(METHOD_ORDER),
+        loc="upper center",
+        bbox_to_anchor=(0.5, 0.99),
+        columnspacing=1.2,
+        handletextpad=0.5,
+        fontsize=8.0,
+    )
+    fig.tight_layout(rect=(0.0, 0.0, 1.0, 0.82))
     fig.savefig(path)
     plt.close(fig)
 

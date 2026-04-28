@@ -3,18 +3,18 @@
 \centering
 \footnotesize
 \setlength{\tabcolsep}{4pt}
-\caption{Per-surface winner counts in the measured-surface benchmark. For each measured \texttt{.sur} surface, the ``winner'' is the method with the lowest height RMSE or the smallest absolute roughness bias for the stated endpoint. The low-roughness column isolates the smoother group ($S_a<500$~nm), whereas the rougher column aggregates the two highest roughness bins ($S_a\geq 1000$~nm).}
+\caption{Per-surface winner counts in the measured-surface benchmark. For each measured \texttt{.sur} surface, the ``winner'' is the method with the lowest height RMSE or the smallest absolute roughness bias for the stated endpoint. Roughness endpoints use the matched-bandwidth benchmark-grid reference. The low-roughness column isolates the smoother benchmark-grid group ($S_a<500$~nm), whereas the rougher column aggregates the two highest roughness bins ($S_a\geq 1000$~nm).}
 \label{tab:dominance_summary}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{p{3.4cm}ccc ccc ccc}
 \toprule
 & \multicolumn{3}{c}{All measured surfaces} & \multicolumn{3}{c}{$S_a<500$~nm} & \multicolumn{3}{c}{$S_a\geq 1000$~nm}\\
-Endpoint & Classical & Quantum-like & Hybrid & Classical & Quantum-like & Hybrid & Classical & Quantum-like & Hybrid\\
+Endpoint & Classical & Coincidence-proxy & Hybrid & Classical & Coincidence-proxy & Hybrid & Classical & Coincidence-proxy & Hybrid\\
 \midrule
-Height RMSE & 12 & 15 & 32 & 8 & 0 & 22 & 4 & 15 & 1 \\
-$|\Delta S_a|$ & 20 & 20 & 19 & 12 & 1 & 17 & 2 & 17 & 1 \\
-$|\Delta S_q|$ & 20 & 26 & 13 & 13 & 6 & 11 & 2 & 17 & 1 \\
-$|\Delta S_z|$ & 12 & 39 & 8 & 11 & 12 & 7 & 1 & 18 & 1 \\
+Height RMSE & 12 & 15 & 32 & 8 & 0 & 25 & 4 & 14 & 1 \\
+$|\Delta S_a|$ & 19 & 17 & 23 & 12 & 0 & 21 & 3 & 16 & 0 \\
+$|\Delta S_q|$ & 17 & 17 & 25 & 11 & 0 & 22 & 3 & 16 & 0 \\
+$|\Delta S_z|$ & 16 & 30 & 13 & 12 & 9 & 12 & 2 & 16 & 1 \\
 \bottomrule
 \end{tabular}
 }%

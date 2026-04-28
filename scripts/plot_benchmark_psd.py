@@ -105,7 +105,7 @@ def _profiles_for_surface(
     return {
         "Reference": _radial_profile(surface.h, dx=dx, dy=dy),
         "Classical": _radial_profile(h_class, dx=dx, dy=dy),
-        "Quantum-like": _radial_profile(h_quant, dx=dx, dy=dy),
+        "Coincidence-proxy": _radial_profile(h_quant, dx=dx, dy=dy),
         "Hybrid": _radial_profile(h_hybrid, dx=dx, dy=dy),
     }
 
@@ -142,7 +142,7 @@ def main() -> int:
     colors = {
         "Reference": "0.15",
         "Classical": "#1f77b4",
-        "Quantum-like": "#d62728",
+        "Coincidence-proxy": "#d62728",
         "Hybrid": "#2ca02c",
     }
 

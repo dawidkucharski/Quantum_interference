@@ -16,22 +16,22 @@ ROW_END = "\\\\"
 METHOD_ORDER = ["classical", "quantum_like", "hybrid"]
 METHOD_LABEL = {
     "classical": "Classical",
-    "quantum_like": "Quantum-like",
+    "quantum_like": "Coincidence-proxy",
     "hybrid": "Hybrid",
 }
 
 METRICS = [
     ("height_rmse_nm", False, "Height RMSE (nm)"),
-    ("bias_Sa_nm", True, "$|\\Delta S_a|$ (nm)"),
-    ("bias_Sq_nm", True, "$|\\Delta S_q|$ (nm)"),
-    ("bias_Sz_nm", True, "$|\\Delta S_z|$ (nm)"),
+    ("bias_Sa_bw_nm", True, "$|\\Delta S_a|$ (nm)"),
+    ("bias_Sq_bw_nm", True, "$|\\Delta S_q|$ (nm)"),
+    ("bias_Sz_bw_nm", True, "$|\\Delta S_z|$ (nm)"),
 ]
 
 TOLERANCE_SPECS = [
-    ("height_rmse_nm", False, "Sq_true_nm", 1.0, r"Height RMSE $> S_q^\mathrm{ref}$"),
-    ("bias_Sa_nm", True, "Sa_true_nm", 0.5, r"$|\Delta S_a| > 0.5 S_a^\mathrm{ref}$"),
-    ("bias_Sq_nm", True, "Sq_true_nm", 0.5, r"$|\Delta S_q| > 0.5 S_q^\mathrm{ref}$"),
-    ("bias_Sz_nm", True, "Sz_true_nm", 0.5, r"$|\Delta S_z| > 0.5 S_z^\mathrm{ref}$"),
+    ("height_rmse_nm", False, "Sq_true_bw_nm", 1.0, r"Height RMSE $> S_q^\mathrm{bench}$"),
+    ("bias_Sa_bw_nm", True, "Sa_true_bw_nm", 0.5, r"$|\Delta S_a| > 0.5 S_a^\mathrm{bench}$"),
+    ("bias_Sq_bw_nm", True, "Sq_true_bw_nm", 0.5, r"$|\Delta S_q| > 0.5 S_q^\mathrm{bench}$"),
+    ("bias_Sz_bw_nm", True, "Sz_true_bw_nm", 0.5, r"$|\Delta S_z| > 0.5 S_z^\mathrm{bench}$"),
 ]
 
 
@@ -72,11 +72,17 @@ def _surface_level_rows(rows: list[dict[str, str]]) -> list[dict[str, object]]:
     numeric_keys = {
         "height_rmse_nm",
         "bias_Sa_nm",
+        "bias_Sa_bw_nm",
         "bias_Sq_nm",
+        "bias_Sq_bw_nm",
         "bias_Sz_nm",
+        "bias_Sz_bw_nm",
         "Sa_true_nm",
+        "Sa_true_bw_nm",
         "Sq_true_nm",
+        "Sq_true_bw_nm",
         "Sz_true_nm",
+        "Sz_true_bw_nm",
     }
     out: list[dict[str, object]] = []
     for stem, method_rows in sorted(grouped.items()):
@@ -195,12 +201,12 @@ def _write_bootstrap_table(
         "\\centering",
         "\\footnotesize",
         "\\setlength{\\tabcolsep}{4pt}",
-        f"\\caption{{Measured-surface benchmark summary using surface-level medians over $n={int(n_surfaces)}$ unique measured surfaces with percentile bootstrap 95\\% confidence intervals. The canonical paper benchmark uses {rep_summary} Monte Carlo realisations per surface and method; repeated runs are collapsed within each surface before between-surface uncertainty is estimated.}}",
+        f"\\caption{{Measured-surface benchmark summary using surface-level medians over $n={int(n_surfaces)}$ unique measured surfaces with percentile bootstrap 95\\% confidence intervals. The canonical paper benchmark uses {rep_summary} Monte Carlo realisations per surface and method; repeated runs are collapsed within each surface before between-surface uncertainty is estimated. Roughness endpoints use the matched-bandwidth benchmark-grid reference rather than the native FV grid.}}",
         "\\label{tab:benchmark_bootstrap_ci}",
         "\\resizebox{\\textwidth}{!}{%",
         "\\begin{tabular}{lccc}",
         "\\toprule",
-        r"Endpoint & Classical & Quantum-like & Hybrid " + ROW_END,
+        r"Endpoint & Classical & Coincidence-proxy & Hybrid " + ROW_END,
         "\\midrule",
     ]
     for metric, _, label in METRICS:
@@ -244,11 +250,11 @@ def _write_tolerance_table(path: Path, surface_rows: list[dict[str, object]], *,
         "\\centering",
         "\\footnotesize",
         "\\setlength{\\tabcolsep}{5pt}",
-        f"\\caption{{Endpoint-referenced tolerance-exceedance rate in the measured-surface benchmark over $n={int(n_surfaces)}$ unique surfaces. For each surface, the reported percentage counts reconstructions whose surface-level error exceeds a descriptor-scaled tolerance band: Height RMSE greater than the FV reference $S_q$, or roughness bias magnitude greater than 50\\% of the corresponding FV reference descriptor. These bands are used here as practical selection thresholds rather than as universal acceptance standards.}}",
+        f"\\caption{{Endpoint-referenced tolerance-exceedance rate in the measured-surface benchmark over $n={int(n_surfaces)}$ unique surfaces. For each surface, the reported percentage counts reconstructions whose surface-level error exceeds a descriptor-scaled tolerance band referenced to the matched-bandwidth benchmark grid: Height RMSE greater than the benchmark-grid $S_q$, or roughness bias magnitude greater than 50\\% of the corresponding benchmark-grid roughness descriptor. These bands are used here as practical selection thresholds rather than as universal acceptance standards.}}",
         "\\label{tab:benchmark_tolerance_rates}",
         "\\begin{tabular}{lccc}",
         "\\toprule",
-        r"Endpoint & Classical & Quantum-like & Hybrid " + ROW_END,
+        r"Endpoint & Classical & Coincidence-proxy & Hybrid " + ROW_END,
         "\\midrule",
     ]
     for metric, _, _, _, label in TOLERANCE_SPECS:
@@ -276,7 +282,7 @@ def _write_repeatability_table(path: Path, rows: list[dict[str, str]], *, n_surf
         "\\resizebox{\\textwidth}{!}{%",
         "\\begin{tabular}{lccc}",
         "\\toprule",
-        r"Endpoint & Classical & Quantum-like & Hybrid " + ROW_END,
+        r"Endpoint & Classical & Coincidence-proxy & Hybrid " + ROW_END,
         "\\midrule",
     ]
     for metric, use_abs, label in METRICS:
@@ -310,12 +316,12 @@ def _write_holdout_table(
         "\\centering",
         "\\footnotesize",
         "\\setlength{\\tabcolsep}{4pt}",
-        f"\\caption{{Leave-one-{group_label}-out stability of the measured-surface method ranking across $n={int(len(groups))}$ {group_label} groups. For each endpoint, the table reports the full-dataset winner, the counts of leave-one-{group_label}-out training winners and held-out winners in Classical / Quantum-like / Hybrid order, and the percentage of splits for which the training-set winner matches the held-out winner.}}",
+        f"\\caption{{Leave-one-{group_label}-out stability of the measured-surface method ranking across $n={int(len(groups))}$ {group_label} groups. For each endpoint, the table reports the full-dataset winner, the counts of leave-one-{group_label}-out training winners and held-out winners in Classical / Coincidence-proxy / Hybrid order, and the percentage of splits for which the training-set winner matches the held-out winner. Roughness endpoints use the matched-bandwidth benchmark-grid reference.}}",
         f"\\label{{{table_label}}}",
         "\\resizebox{\\textwidth}{!}{%",
         "\\begin{tabular}{lcccc}",
         "\\toprule",
-        r"Endpoint & Full-data winner & Train winners (C/Q/H) & Holdout winners (C/Q/H) & Match rate (\%) " + ROW_END,
+        r"Endpoint & Full-data winner & Train winners (C/P/H) & Holdout winners (C/P/H) & Match rate (\%) " + ROW_END,
         "\\midrule",
     ]
     for metric, use_abs, label in METRICS:

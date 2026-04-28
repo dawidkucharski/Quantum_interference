@@ -3,17 +3,17 @@
 \centering
 \footnotesize
 \setlength{\tabcolsep}{4pt}
-\caption{Measured-surface benchmark summary using surface-level medians over $n=59$ unique measured surfaces with percentile bootstrap 95\% confidence intervals. The canonical paper benchmark uses $n_\mathrm{rep}=4$ Monte Carlo realisations per surface and method; repeated runs are collapsed within each surface before between-surface uncertainty is estimated.}
+\caption{Measured-surface benchmark summary using surface-level medians over $n=59$ unique measured surfaces with percentile bootstrap 95\% confidence intervals. The canonical paper benchmark uses $n_\mathrm{rep}=4$ Monte Carlo realisations per surface and method; repeated runs are collapsed within each surface before between-surface uncertainty is estimated. Roughness endpoints use the matched-bandwidth benchmark-grid reference rather than the native FV grid.}
 \label{tab:benchmark_bootstrap_ci}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccc}
 \toprule
-Endpoint & Classical & Quantum-like & Hybrid \\
+Endpoint & Classical & Coincidence-proxy & Hybrid \\
 \midrule
 Height RMSE (nm) & $1065.7$ [$898.4$, $1205.6$] & $709.6$ [$709.4$, $709.9$] & $314.0$ [$259.6$, $435.6$] \\
-$|\Delta S_a|$ (nm) & $301.8$ [$139.6$, $394.8$] & $308.1$ [$237.5$, $409.1$] & $129.6$ [$88.4$, $368.7$] \\
-$|\Delta S_q|$ (nm) & $423.4$ [$175.2$, $765.5$] & $395.2$ [$295.3$, $576.4$] & $419.1$ [$214.4$, $754.1$] \\
-$|\Delta S_z|$ (nm) & $37163.2$ [$8473.6$, $66207.4$] & $25745.5$ [$9087.5$, $38488.5$] & $37457.4$ [$13806.2$, $64226.3$] \\
+$|\Delta S_a|$ (nm) & $337.9$ [$228.3$, $416.4$] & $332.5$ [$293.2$, $382.3$] & $88.4$ [$63.7$, $153.5$] \\
+$|\Delta S_q|$ (nm) & $435.8$ [$278.2$, $549.6$] & $396.0$ [$327.0$, $457.8$] & $153.3$ [$104.3$, $213.9$] \\
+$|\Delta S_z|$ (nm) & $8465.9$ [$4200.3$, $17111.4$] & $2509.1$ [$1926.6$, $4127.1$] & $5349.5$ [$2204.4$, $15599.6$] \\
 \bottomrule
 \end{tabular}
 }%

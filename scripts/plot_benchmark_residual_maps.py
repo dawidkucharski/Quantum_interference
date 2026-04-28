@@ -176,7 +176,7 @@ def main() -> None:
 
     ref_im = None
     res_im = None
-    col_titles = ["Reference", "Classical residual", "Quantum-like residual", "Hybrid residual"]
+    col_titles = ["Reference", "Classical residual", "Coincidence-proxy residual", "Hybrid residual"]
     for idx, title in enumerate(col_titles):
         axes[0, idx].set_title(title)
 

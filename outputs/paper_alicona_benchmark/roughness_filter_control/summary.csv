@@ -1,0 +1,4 @@
+endpoint,baseline_classical_median_abs_nm,baseline_coincidence_proxy_median_abs_nm,baseline_hybrid_median_abs_nm,baseline_material_match_pct,baseline_treatment_match_pct,baseline_winner,filtered_classical_median_abs_nm,filtered_coincidence_proxy_median_abs_nm,filtered_hybrid_median_abs_nm,filtered_material_match_pct,filtered_treatment_match_pct,filtered_winner
+$|\Delta S_a|$,337.925163,332.482703,88.389711,83.333333,70.000000,Hybrid,334.419371,403.414327,95.954525,83.333333,60.000000,Hybrid
+$|\Delta S_q|$,435.797943,396.028374,153.262090,83.333333,60.000000,Hybrid,426.674030,471.992169,146.116568,66.666667,60.000000,Hybrid
+$|\Delta S_z|$,8465.935365,2509.068526,5349.510107,83.333333,60.000000,Coincidence-proxy,8005.967663,2437.706146,6236.959071,83.333333,60.000000,Coincidence-proxy

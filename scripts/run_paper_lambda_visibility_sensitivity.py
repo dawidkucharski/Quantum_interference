@@ -64,7 +64,7 @@ def _write_table(path: Path, rows: list[dict[str, float | str]], *, nreps: int) 
         "\\resizebox{\\textwidth}{!}{%",
         "\\begin{tabular}{ccccc}",
         "\\toprule",
-        "Visibility scale & $\\Delta\\lambda$ (nm) & $\\Lambda_{\\mathrm{eff}}$ ($\\mu$m) & Classical RMSE (nm) & Quantum-like / Hybrid RMSE (nm) \\\\",
+        "Visibility scale & $\\Delta\\lambda$ (nm) & $\\Lambda_{\\mathrm{eff}}$ ($\\mu$m) & Classical RMSE (nm) & Coincidence-proxy / Hybrid RMSE (nm) " + chr(92) + chr(92),
         "\\midrule",
     ]
 
@@ -120,7 +120,7 @@ def _plot(path: Path, rows: list[dict[str, float | str]]) -> None:
 
     method_styles = {
         "classical": {"color": "#355070", "label": "Classical", "linestyle": "--"},
-        "quantum_like": {"color": "#b56576", "label": "Quantum-like diff", "linestyle": "-"},
+        "quantum_like": {"color": "#b56576", "label": "Coincidence-proxy diff", "linestyle": "-"},
         "hybrid": {"color": "#6d597a", "label": "Hybrid diff", "linestyle": "-"},
     }
 

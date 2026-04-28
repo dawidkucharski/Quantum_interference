@@ -3,16 +3,16 @@
 \centering
 \footnotesize
 \setlength{\tabcolsep}{5pt}
-\caption{Endpoint-referenced tolerance-exceedance rate in the measured-surface benchmark over $n=59$ unique surfaces. For each surface, the reported percentage counts reconstructions whose surface-level error exceeds a descriptor-scaled tolerance band: Height RMSE greater than the FV reference $S_q$, or roughness bias magnitude greater than 50\% of the corresponding FV reference descriptor. These bands are used here as practical selection thresholds rather than as universal acceptance standards.}
+\caption{Endpoint-referenced tolerance-exceedance rate in the measured-surface benchmark over $n=59$ unique surfaces. For each surface, the reported percentage counts reconstructions whose surface-level error exceeds a descriptor-scaled tolerance band referenced to the matched-bandwidth benchmark grid: Height RMSE greater than the benchmark-grid $S_q$, or roughness bias magnitude greater than 50\% of the corresponding benchmark-grid roughness descriptor. These bands are used here as practical selection thresholds rather than as universal acceptance standards.}
 \label{tab:benchmark_tolerance_rates}
 \begin{tabular}{lccc}
 \toprule
-Endpoint & Classical & Quantum-like & Hybrid \\
+Endpoint & Classical & Coincidence-proxy & Hybrid \\
 \midrule
-Height RMSE $> S_q^\mathrm{ref}$ & $50.8$ & $47.5$ & $20.3$ \\
-$|\Delta S_a| > 0.5 S_a^\mathrm{ref}$ & $62.7$ & $54.2$ & $37.3$ \\
-$|\Delta S_q| > 0.5 S_q^\mathrm{ref}$ & $64.4$ & $42.4$ & $44.1$ \\
-$|\Delta S_z| > 0.5 S_z^\mathrm{ref}$ & $79.7$ & $74.6$ & $81.4$ \\
+Height RMSE $> S_q^\mathrm{bench}$ & $89.8$ & $64.4$ & $25.4$ \\
+$|\Delta S_a| > 0.5 S_a^\mathrm{bench}$ & $66.1$ & $62.7$ & $25.4$ \\
+$|\Delta S_q| > 0.5 S_q^\mathrm{bench}$ & $64.4$ & $62.7$ & $28.8$ \\
+$|\Delta S_z| > 0.5 S_z^\mathrm{bench}$ & $74.6$ & $42.4$ & $62.7$ \\
 \bottomrule
 \end{tabular}
 \end{table}

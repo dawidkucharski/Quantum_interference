@@ -9,13 +9,13 @@ from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
-from scipy.stats import wilcoxon
+from scipy.stats import rankdata, wilcoxon
 
 
 METHOD_ORDER = ["classical", "quantum_like", "hybrid"]
 METHOD_LABEL = {
     "classical": "Classical",
-    "quantum_like": "Quantum-like",
+    "quantum_like": "Coincidence-proxy",
     "hybrid": "Hybrid",
 }
 
@@ -23,15 +23,15 @@ ROW_END = "\\\\"
 
 METRICS = [
     ("Height RMSE", "height_rmse_nm", False),
-    (r"$|\Delta S_a|$", "bias_Sa_nm", True),
-    (r"$|\Delta S_q|$", "bias_Sq_nm", True),
-    (r"$|\Delta S_z|$", "bias_Sz_nm", True),
+    (r"$|\Delta S_a|$", "bias_Sa_bw_nm", True),
+    (r"$|\Delta S_q|$", "bias_Sq_bw_nm", True),
+    (r"$|\Delta S_z|$", "bias_Sz_bw_nm", True),
 ]
 
 PAIR_ORDER = [
     ("hybrid", "classical", "Hybrid vs Classical"),
-    ("hybrid", "quantum_like", "Hybrid vs Quantum-like"),
-    ("quantum_like", "classical", "Quantum-like vs Classical"),
+    ("hybrid", "quantum_like", "Hybrid vs Coincidence-proxy"),
+    ("quantum_like", "classical", "Coincidence-proxy vs Classical"),
 ]
 
 
@@ -54,10 +54,11 @@ def _collapse_surface_rows(rows: list[dict[str, str]]) -> dict[str, dict[str, di
             continue
         collapsed = {
             "Sa_true_nm": float(np.median([float(entry["Sa_true_nm"]) for entry in entries])),
+            "Sa_true_bw_nm": float(np.median([float(entry["Sa_true_bw_nm"]) for entry in entries])),
             "height_rmse_nm": float(np.median([float(entry["height_rmse_nm"]) for entry in entries])),
-            "bias_Sa_nm": float(np.median([float(entry["bias_Sa_nm"]) for entry in entries])),
-            "bias_Sq_nm": float(np.median([float(entry["bias_Sq_nm"]) for entry in entries])),
-            "bias_Sz_nm": float(np.median([float(entry["bias_Sz_nm"]) for entry in entries])),
+            "bias_Sa_bw_nm": float(np.median([float(entry["bias_Sa_bw_nm"]) for entry in entries])),
+            "bias_Sq_bw_nm": float(np.median([float(entry["bias_Sq_bw_nm"]) for entry in entries])),
+            "bias_Sz_bw_nm": float(np.median([float(entry["bias_Sz_bw_nm"]) for entry in entries])),
         }
         out[stem][method] = collapsed
     return dict(out)
@@ -79,7 +80,7 @@ def _winner_counts(
     for _, method_map in surface_map.items():
         if len(method_map) < 2:
             continue
-        sa_true = float(np.mean([vals["Sa_true_nm"] for vals in method_map.values()]))
+        sa_true = float(np.mean([vals["Sa_true_bw_nm"] for vals in method_map.values()]))
         if sa_min is not None and sa_true < sa_min:
             continue
         if sa_max is not None and sa_true >= sa_max:
@@ -105,8 +106,39 @@ def _format_pvalue(pvalue: float) -> str:
     if pvalue < 0.05:
         exponent = int(math.floor(math.log10(pvalue)))
         mantissa = pvalue / (10 ** exponent)
+        if mantissa >= 9.95:
+            mantissa /= 10.0
+            exponent += 1
         return f"${mantissa:.1f}\\times 10^{{{exponent}}}$"
     return f"${pvalue:.3f}$"
+
+
+def _holm_adjust(pvalues: list[float]) -> list[float]:
+    if not pvalues:
+        return []
+    indexed = sorted(enumerate(pvalues), key=lambda item: item[1])
+    adjusted = [1.0] * len(pvalues)
+    running = 0.0
+    m = len(pvalues)
+    for rank, (idx, pvalue) in enumerate(indexed):
+        candidate = min(1.0, (m - rank) * pvalue)
+        running = max(running, candidate)
+        adjusted[idx] = running
+    return adjusted
+
+
+def _rank_biserial(vals_a: np.ndarray, vals_b: np.ndarray) -> float:
+    diff = vals_a - vals_b
+    diff = diff[diff != 0]
+    if diff.size == 0:
+        return float("nan")
+    ranks = rankdata(np.abs(diff), method="average")
+    positive = float(np.sum(ranks[diff > 0]))
+    negative = float(np.sum(ranks[diff < 0]))
+    denom = positive + negative
+    if denom == 0:
+        return float("nan")
+    return (positive - negative) / denom
 
 
 def _paired_values(
@@ -161,13 +193,13 @@ def _write_dominance_table(path: Path, surface_map: dict[str, dict[str, dict[str
         "\\centering",
         "\\footnotesize",
         "\\setlength{\\tabcolsep}{4pt}",
-        "\\caption{Per-surface winner counts in the measured-surface benchmark. For each measured \\texttt{.sur} surface, the ``winner'' is the method with the lowest height RMSE or the smallest absolute roughness bias for the stated endpoint. The low-roughness column isolates the smoother group ($S_a<500$~nm), whereas the rougher column aggregates the two highest roughness bins ($S_a\\geq 1000$~nm).}",
+        "\\caption{Per-surface winner counts in the measured-surface benchmark. For each measured \\texttt{.sur} surface, the ``winner'' is the method with the lowest height RMSE or the smallest absolute roughness bias for the stated endpoint. Roughness endpoints use the matched-bandwidth benchmark-grid reference. The low-roughness column isolates the smoother benchmark-grid group ($S_a<500$~nm), whereas the rougher column aggregates the two highest roughness bins ($S_a\\geq 1000$~nm).}",
         "\\label{tab:dominance_summary}",
         "\\resizebox{\\textwidth}{!}{%",
         "\\begin{tabular}{p{3.4cm}ccc ccc ccc}",
         "\\toprule",
         r"& \multicolumn{3}{c}{All measured surfaces} & \multicolumn{3}{c}{$S_a<500$~nm} & \multicolumn{3}{c}{$S_a\geq 1000$~nm}" + ROW_END,
-        r"Endpoint & Classical & Quantum-like & Hybrid & Classical & Quantum-like & Hybrid & Classical & Quantum-like & Hybrid" + ROW_END,
+        r"Endpoint & Classical & Coincidence-proxy & Hybrid & Classical & Coincidence-proxy & Hybrid & Classical & Coincidence-proxy & Hybrid" + ROW_END,
         "\\midrule",
     ]
     for endpoint, metric_key, use_abs in METRICS:
@@ -191,22 +223,10 @@ def _write_dominance_table(path: Path, surface_map: dict[str, dict[str, dict[str
 
 def _write_wilcoxon_table(path: Path, surface_map: dict[str, dict[str, dict[str, float]]]) -> None:
     n_surfaces = _surface_count(surface_map)
-    lines = [
-        "% Auto-generated by scripts/make_benchmark_comparison_tables.py",
-        "\\begin{table}[t]",
-        "\\centering",
-        "\\footnotesize",
-        "\\setlength{\\tabcolsep}{5pt}",
-        f"\\caption{{Exploratory paired Wilcoxon signed-rank tests across $n={int(n_surfaces)}$ measured surfaces. Reported are uncorrected two-sided $p$-values for paired surface-level errors after collapsing repeated runs within each surface and method; they are included as descriptive checks rather than as multiplicity-controlled confirmatory inference.}}",
-        "\\label{tab:benchmark_wilcoxon}",
-        "\\begin{tabular}{lccc}",
-        "\\toprule",
-        "Endpoint & Hybrid vs Classical & Hybrid vs Quantum-like & Quantum-like vs Classical " + ROW_END,
-        "\\midrule",
-    ]
+    tests: list[tuple[str, str, float, float, float, float]] = []
+    pvalues: list[float] = []
     for endpoint, metric_key, use_abs in METRICS:
-        row = [endpoint]
-        for method_a, method_b, _ in PAIR_ORDER:
+        for method_a, method_b, label in PAIR_ORDER:
             vals_a, vals_b = _paired_values(
                 surface_map,
                 metric_key=metric_key,
@@ -215,11 +235,45 @@ def _write_wilcoxon_table(path: Path, surface_map: dict[str, dict[str, dict[str,
                 method_b=method_b,
             )
             _, pvalue = wilcoxon(vals_a, vals_b, alternative="two-sided")
-            row.append(_format_pvalue(float(pvalue)))
+            median_diff, win_rate, _ = _paired_effect_summary(
+                surface_map,
+                metric_key=metric_key,
+                use_abs=use_abs,
+                method_a=method_a,
+                method_b=method_b,
+            )
+            effect = _rank_biserial(vals_a, vals_b)
+            tests.append((endpoint, label, median_diff, win_rate, effect, float(pvalue)))
+            pvalues.append(float(pvalue))
+    adjusted = _holm_adjust(pvalues)
+    lines = [
+        "% Auto-generated by scripts/make_benchmark_comparison_tables.py",
+        "\\begin{table}[t]",
+        "\\centering",
+        "\\footnotesize",
+        "\\setlength{\\tabcolsep}{4pt}",
+        f"\\caption{{Paired statistical screen across $n={int(n_surfaces)}$ measured surfaces after collapsing repeated runs to one surface-level error per method. The table reports the median signed error difference $\\Delta$ (first method minus second; negative values favour the first method), the percentage of paired surfaces won by the first method, the paired rank-biserial effect $r_\\mathrm{{rb}}$ (negative values favour the first method), and Holm-adjusted two-sided Wilcoxon signed-rank $p$-values across all endpoint/pair tests. Roughness endpoints use the matched-bandwidth benchmark-grid reference.}}",
+        "\\label{tab:benchmark_wilcoxon}",
+        "\\resizebox{\\textwidth}{!}{%",
+        "\\begin{tabular}{llrrrr}",
+        "\\toprule",
+        r"Endpoint & Pair & Median $\Delta$ (nm) & Wins (\%) & $r_\mathrm{rb}$ & Holm $p$" + ROW_END,
+        "\\midrule",
+    ]
+    for (endpoint, label, median_diff, win_rate, effect, _), adjusted_p in zip(tests, adjusted):
+        row = [
+            endpoint,
+            label,
+            f"${median_diff:.1f}$",
+            f"${win_rate:.1f}$",
+            f"${effect:.2f}$",
+            _format_pvalue(adjusted_p),
+        ]
         lines.append(" & ".join(row) + " " + ROW_END)
     lines.extend([
         "\\bottomrule",
         "\\end{tabular}",
+        "}%",
         "\\end{table}",
         "",
     ])
@@ -234,12 +288,12 @@ def _write_effects_table(path: Path, surface_map: dict[str, dict[str, dict[str, 
         "\\centering",
         "\\footnotesize",
         "\\setlength{\\tabcolsep}{4pt}",
-        f"\\caption{{Paired effect summary across $n={int(n_surfaces)}$ measured surfaces. Each entry reports the median signed surface-level error difference (first method minus second; negative values favour the first method) together with the percentage of surfaces on which the first method attains the lower error.}}",
+        f"\\caption{{Paired effect summary across $n={int(n_surfaces)}$ measured surfaces. Each entry reports the median signed surface-level error difference (first method minus second; negative values favour the first method) together with the percentage of surfaces on which the first method attains the lower error. Roughness endpoints use the matched-bandwidth benchmark-grid reference.}}",
         "\\label{tab:benchmark_paired_effects}",
         "\\resizebox{\\textwidth}{!}{%",
         "\\begin{tabular}{lrr r r r r}",
         "\\toprule",
-        r"& \multicolumn{2}{c}{Hybrid $-$ Classical} & \multicolumn{2}{c}{Hybrid $-$ Quantum-like} & \multicolumn{2}{c}{Quantum-like $-$ Classical}" + ROW_END,
+        r"& \multicolumn{2}{c}{Hybrid $-$ Classical} & \multicolumn{2}{c}{Hybrid $-$ Coincidence-proxy} & \multicolumn{2}{c}{Coincidence-proxy $-$ Classical}" + ROW_END,
         r"Endpoint & Median $\Delta$ (nm) & Wins (\%) & Median $\Delta$ (nm) & Wins (\%) & Median $\Delta$ (nm) & Wins (\%)" + ROW_END,
         "\\midrule",
     ]

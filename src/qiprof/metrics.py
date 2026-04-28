@@ -5,6 +5,7 @@ from dataclasses import asdict, dataclass
 from typing import Optional
 
 import numpy as np
+from scipy.ndimage import gaussian_filter
 
 
 @dataclass(frozen=True)
@@ -64,6 +65,140 @@ def roughness_metrics(h_m: np.ndarray, *, valid_mask: Optional[np.ndarray] = Non
     """
 
     h_dt = detrend_plane_masked(h_m, valid_mask=valid_mask)
+    finite = np.isfinite(h_dt)
+    if valid_mask is None:
+        mask = finite
+    else:
+        if valid_mask.shape != h_dt.shape:
+            raise ValueError("valid_mask must have the same shape as h_m")
+        mask = valid_mask & finite
+
+    vals = h_dt[mask]
+    if vals.size == 0:
+        return Roughness(Sa=float("nan"), Sq=float("nan"), Sz=float("nan"))
+
+    Sa = float(np.mean(np.abs(vals)))
+    Sq = float(np.sqrt(np.mean(vals**2)))
+    Sz = float(np.max(vals) - np.min(vals))
+    return Roughness(Sa=Sa, Sq=Sq, Sz=Sz)
+
+
+def _gaussian_sigma_px(*, cutoff_m: float, spacing_m: float) -> float:
+    if cutoff_m <= 0.0:
+        return 0.0
+    if spacing_m <= 0.0:
+        raise ValueError("spacing_m must be positive")
+    return float(cutoff_m * np.sqrt(np.log(2.0)) / (2.0 * np.pi * spacing_m))
+
+
+def _gaussian_lowpass_masked(
+    h_m: np.ndarray,
+    *,
+    sigma_x_px: float,
+    sigma_y_px: float,
+    valid_mask: Optional[np.ndarray],
+) -> np.ndarray:
+    if sigma_x_px <= 0.0 and sigma_y_px <= 0.0:
+        return np.asarray(h_m, dtype=float).copy()
+
+    arr = np.asarray(h_m, dtype=float)
+    finite = np.isfinite(arr)
+    if valid_mask is None:
+        mask = finite
+    else:
+        if valid_mask.shape != arr.shape:
+            raise ValueError("valid_mask must have the same shape as h_m")
+        mask = valid_mask & finite
+
+    weights = mask.astype(float)
+    data = np.where(mask, arr, 0.0)
+    sigma = (float(sigma_y_px), float(sigma_x_px))
+    smooth_data = gaussian_filter(data, sigma=sigma, mode="nearest")
+    smooth_weights = gaussian_filter(weights, sigma=sigma, mode="nearest")
+    with np.errstate(divide="ignore", invalid="ignore"):
+        out = smooth_data / smooth_weights
+    out[smooth_weights <= 1e-12] = np.nan
+    return out
+
+
+def gaussian_filter_band(
+    h_m: np.ndarray,
+    *,
+    dx: float,
+    dy: float,
+    valid_mask: Optional[np.ndarray] = None,
+    s_filter_m: Optional[float] = None,
+    l_filter_m: Optional[float] = None,
+) -> np.ndarray:
+    """Apply an approximate ISO-style Gaussian S/L filtering sensitivity control.
+
+    This is intentionally a standards-aligned sensitivity check, not a claim of
+    full ISO 16610 / ISO 25178 traceability. The surface is plane-detrended,
+    optionally low-pass filtered with an S-filter nesting index to suppress the
+    shortest wavelengths, and then high-pass filtered with an L-filter nesting
+    index to suppress the longest wavelengths.
+    """
+
+    work = detrend_plane_masked(h_m, valid_mask=valid_mask)
+    finite = np.isfinite(work)
+    if valid_mask is None:
+        mask = finite
+    else:
+        if valid_mask.shape != work.shape:
+            raise ValueError("valid_mask must have the same shape as h_m")
+        mask = valid_mask & finite
+
+    if s_filter_m is not None and float(s_filter_m) > 0.0:
+        work = _gaussian_lowpass_masked(
+            work,
+            sigma_x_px=_gaussian_sigma_px(cutoff_m=float(s_filter_m), spacing_m=float(dx)),
+            sigma_y_px=_gaussian_sigma_px(cutoff_m=float(s_filter_m), spacing_m=float(dy)),
+            valid_mask=mask,
+        )
+
+    if l_filter_m is not None and float(l_filter_m) > 0.0:
+        waviness = _gaussian_lowpass_masked(
+            work,
+            sigma_x_px=_gaussian_sigma_px(cutoff_m=float(l_filter_m), spacing_m=float(dx)),
+            sigma_y_px=_gaussian_sigma_px(cutoff_m=float(l_filter_m), spacing_m=float(dy)),
+            valid_mask=mask,
+        )
+        work = work - waviness
+
+    work[~mask] = np.nan
+    return work
+
+
+def roughness_metrics(
+    h_m: np.ndarray,
+    *,
+    valid_mask: Optional[np.ndarray] = None,
+    dx: Optional[float] = None,
+    dy: Optional[float] = None,
+    s_filter_m: Optional[float] = None,
+    l_filter_m: Optional[float] = None,
+) -> Roughness:
+    """Compute basic areal roughness metrics from ISO-like definitions.
+
+    Invalid pixels (NaN/inf or masked out via `valid_mask`) are ignored.
+    When `s_filter_m` and/or `l_filter_m` are provided, an approximate
+    Gaussian nesting-index filtering sensitivity control is applied before the
+    roughness descriptors are computed.
+    """
+
+    if (s_filter_m is not None and float(s_filter_m) > 0.0) or (l_filter_m is not None and float(l_filter_m) > 0.0):
+        if dx is None or dy is None:
+            raise ValueError("dx and dy are required when Gaussian roughness filters are requested")
+        h_dt = gaussian_filter_band(
+            h_m,
+            dx=float(dx),
+            dy=float(dy),
+            valid_mask=valid_mask,
+            s_filter_m=s_filter_m,
+            l_filter_m=l_filter_m,
+        )
+    else:
+        h_dt = detrend_plane_masked(h_m, valid_mask=valid_mask)
     finite = np.isfinite(h_dt)
     if valid_mask is None:
         mask = finite

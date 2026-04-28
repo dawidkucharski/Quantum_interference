@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Endpoint-level evidence summary for the submission-facing claim. The table separates the fixed-workflow architecture result from endpoint-specific roughness behaviour and lists the strongest control or comparator that bounds each claim.}
+\label{tab:endpoint_evidence_summary}
+\resizebox{\textwidth}{!}{%
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{2.6cm}>{\RaggedRight\arraybackslash}p{2.8cm}>{\RaggedRight\arraybackslash}p{4.3cm}>{\RaggedRight\arraybackslash}X}
+\toprule
+Endpoint & Supported fixed-workflow result & Strongest bound or control & Submission-facing interpretation \\
+\midrule
+Detrended height RMSE & Hybrid: 314.0~nm median; 32/59 per-surface wins & Classical-frontier oracle remains higher at 559.1~nm; non-ideal rate model preserves hybrid ordering at 376.3~nm & Strongest claim: coincidence-derived information is useful as a coarse prior for height-fidelity reconstruction. \\
+Matched-bandwidth $|\Delta S_a|$ & Hybrid: 86.3~nm median absolute error & Treatment holdout agreement is 70.0\%; filtered roughness control preserves the endpoint split & Useful texture-amplitude result within the benchmark grid, but not a portable roughness rule. \\
+Matched-bandwidth $|\Delta S_q|$ & Hybrid: 152.4~nm median absolute error & Treatment holdout agreement is 60.0\%; filtered material holdout weakens to 66.7\% & Supports hybrid as the best primary-branch RMS texture estimator on the benchmark grid, with process dependence. \\
+Matched-bandwidth $|\Delta S_z|$ & Coincidence-proxy: 2653.1~nm median absolute error & Descriptor-scaled tolerance is still exceeded on 42.4\% of surfaces; classical frontier reaches 1208.2~nm & Envelope-following benefit is selective and endpoint-specific, not evidence for overall metrology superiority. \\
+Direct long-$\Lambda$ reconstruction & Retained only for ambiguity or envelope tasks & Classical two-colour control reproduces much of the direct long-wavelength behaviour & Direct branch is a comparator and coarse observable, not the recommended final fine-texture workflow. \\
+\bottomrule
+\end{tabularx}
+}%
+\end{table}

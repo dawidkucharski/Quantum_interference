@@ -23,7 +23,7 @@ def _pretty_method(m: str) -> str:
     if m == "classical":
         return "Classical"
     if m == "quantum_like":
-        return "Quantum-like"
+        return "Coincidence-proxy"
     if m == "hybrid":
         return "Hybrid"
     return _latex_escape(m)

@@ -3,17 +3,17 @@
 \centering
 \footnotesize
 \setlength{\tabcolsep}{4pt}
-\caption{Leave-one-treatment-out stability of the measured-surface method ranking across $n=10$ treatment groups. For each endpoint, the table reports the full-dataset winner, the counts of leave-one-treatment-out training winners and held-out winners in Classical / Quantum-like / Hybrid order, and the percentage of splits for which the training-set winner matches the held-out winner.}
+\caption{Leave-one-treatment-out stability of the measured-surface method ranking across $n=10$ treatment groups. For each endpoint, the table reports the full-dataset winner, the counts of leave-one-treatment-out training winners and held-out winners in Classical / Coincidence-proxy / Hybrid order, and the percentage of splits for which the training-set winner matches the held-out winner. Roughness endpoints use the matched-bandwidth benchmark-grid reference.}
 \label{tab:benchmark_holdout_treatment}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \toprule
-Endpoint & Full-data winner & Train winners (C/Q/H) & Holdout winners (C/Q/H) & Match rate (\%) \\
+Endpoint & Full-data winner & Train winners (C/P/H) & Holdout winners (C/P/H) & Match rate (\%) \\
 \midrule
 Height RMSE (nm) & Hybrid & $0 / 0 / 10$ & $0 / 2 / 8$ & $80.0$ \\
-$|\Delta S_a|$ (nm) & Hybrid & $0 / 0 / 10$ & $2 / 3 / 5$ & $50.0$ \\
-$|\Delta S_q|$ (nm) & Quantum-like & $1 / 4 / 5$ & $5 / 2 / 3$ & $0.0$ \\
-$|\Delta S_z|$ (nm) & Quantum-like & $0 / 10 / 0$ & $1 / 7 / 2$ & $70.0$ \\
+$|\Delta S_a|$ (nm) & Hybrid & $0 / 0 / 10$ & $1 / 2 / 7$ & $70.0$ \\
+$|\Delta S_q|$ (nm) & Hybrid & $0 / 0 / 10$ & $1 / 3 / 6$ & $60.0$ \\
+$|\Delta S_z|$ (nm) & Coincidence-proxy & $0 / 10 / 0$ & $1 / 6 / 3$ & $60.0$ \\
 \bottomrule
 \end{tabular}
 }%

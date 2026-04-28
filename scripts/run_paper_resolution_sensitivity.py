@@ -63,9 +63,9 @@ def _collapse_surface_rows(rows: list[dict[str, str]]) -> list[dict[str, float |
                 "stem": stem,
                 "method": method,
                 "height_rmse_nm": float(np.median([float(e["height_rmse_nm"]) for e in entries])),
-                "abs_bias_Sa_nm": float(np.median([abs(float(e["bias_Sa_nm"])) for e in entries])),
-                "abs_bias_Sq_nm": float(np.median([abs(float(e["bias_Sq_nm"])) for e in entries])),
-                "abs_bias_Sz_nm": float(np.median([abs(float(e["bias_Sz_nm"])) for e in entries])),
+                "abs_bias_Sa_nm": float(np.median([abs(float(e["bias_Sa_bw_nm"])) for e in entries])),
+                "abs_bias_Sq_nm": float(np.median([abs(float(e["bias_Sq_bw_nm"])) for e in entries])),
+                "abs_bias_Sz_nm": float(np.median([abs(float(e["bias_Sz_bw_nm"])) for e in entries])),
             }
         )
     return out
@@ -79,7 +79,7 @@ def _method_order(methods: set[str]) -> list[str]:
 def _method_label(method: str) -> str:
     return {
         "classical": "Classical",
-        "quantum_like": "Quantum-like",
+        "quantum_like": "Coincidence-proxy",
         "hybrid": "Hybrid",
     }.get(method, method)
 

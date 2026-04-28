@@ -2,17 +2,27 @@
 \begin{table}[t]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{5pt}
-\caption{Exploratory paired Wilcoxon signed-rank tests across $n=59$ measured surfaces. Reported are uncorrected two-sided $p$-values for paired surface-level errors after collapsing repeated runs within each surface and method; they are included as descriptive checks rather than as multiplicity-controlled confirmatory inference.}
+\setlength{\tabcolsep}{4pt}
+\caption{Paired statistical screen across $n=59$ measured surfaces after collapsing repeated runs to one surface-level error per method. The table reports the median signed error difference $\Delta$ (first method minus second; negative values favour the first method), the percentage of paired surfaces won by the first method, the paired rank-biserial effect $r_\mathrm{rb}$ (negative values favour the first method), and Holm-adjusted two-sided Wilcoxon signed-rank $p$-values across all endpoint/pair tests. Roughness endpoints use the matched-bandwidth benchmark-grid reference.}
 \label{tab:benchmark_wilcoxon}
-\begin{tabular}{lccc}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
 \toprule
-Endpoint & Hybrid vs Classical & Hybrid vs Quantum-like & Quantum-like vs Classical \\
+Endpoint & Pair & Median $\Delta$ (nm) & Wins (\%) & $r_\mathrm{rb}$ & Holm $p$\\
 \midrule
-Height RMSE & $9.1\times 10^{-6}$ & $1.2\times 10^{-2}$ & $0.061$ \\
-$|\Delta S_a|$ & $7.5\times 10^{-3}$ & $0.970$ & $0.751$ \\
-$|\Delta S_q|$ & $0.305$ & $0.105$ & $0.199$ \\
-$|\Delta S_z|$ & $1.7\times 10^{-2}$ & $1.7\times 10^{-5}$ & $1.2\times 10^{-5}$ \\
+Height RMSE & Hybrid vs Classical & $-625.1$ & $79.7$ & $-0.66$ & $1.1\times 10^{-4}$ \\
+Height RMSE & Hybrid vs Coincidence-proxy & $-439.9$ & $74.6$ & $-0.38$ & $0.072$ \\
+Height RMSE & Coincidence-proxy vs Classical & $-250.1$ & $66.1$ & $-0.28$ & $0.306$ \\
+$|\Delta S_a|$ & Hybrid vs Classical & $-206.6$ & $61.0$ & $-0.51$ & $7.1\times 10^{-3}$ \\
+$|\Delta S_a|$ & Hybrid vs Coincidence-proxy & $-303.7$ & $67.8$ & $-0.21$ & $0.678$ \\
+$|\Delta S_a|$ & Coincidence-proxy vs Classical & $12.4$ & $47.5$ & $0.01$ & $1.000$ \\
+$|\Delta S_q|$ & Hybrid vs Classical & $-132.0$ & $64.4$ & $-0.47$ & $1.6\times 10^{-2}$ \\
+$|\Delta S_q|$ & Hybrid vs Coincidence-proxy & $-300.0$ & $67.8$ & $-0.13$ & $1.000$ \\
+$|\Delta S_q|$ & Coincidence-proxy vs Classical & $24.3$ & $49.2$ & $-0.05$ & $1.000$ \\
+$|\Delta S_z|$ & Hybrid vs Classical & $-2065.9$ & $62.7$ & $-0.49$ & $1.0\times 10^{-2}$ \\
+$|\Delta S_z|$ & Hybrid vs Coincidence-proxy & $2840.4$ & $42.4$ & $0.39$ & $0.069$ \\
+$|\Delta S_z|$ & Coincidence-proxy vs Classical & $-2546.3$ & $57.6$ & $-0.46$ & $1.6\times 10^{-2}$ \\
 \bottomrule
 \end{tabular}
+}%
 \end{table}

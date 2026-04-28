@@ -1,4 +1,4 @@
-% Practical method-selection flow derived from the grouped benchmark trends
+% Screening flow for planning follow-up validation derived from the grouped benchmark trends
 \begin{tikzpicture}[x=1cm,y=1cm, font=\footnotesize, >=Stealth]
   \tikzset{
     head/.style={draw, rounded corners=3pt, fill=gray!14, align=center, text width=4.7cm, minimum height=0.95cm, inner sep=5pt},
@@ -8,17 +8,17 @@
     line/.style={-Stealth, line width=0.85pt}
   }
 
-  \node[head] (start) at (0,0) {\textbf{Method selection guide}\\Choose the branch that matches the metrology endpoint.};
+  \node[head] (start) at (0,0) {\textbf{Follow-up validation screening}\\Prioritise the branch that matches the endpoint worth testing first.};
 
   \node[qbox] (rmseq) at (-4.4,-2.2) {\textbf{Height fidelity}\\Lowest RMSE or best fine\\texture reproduction};
   \node[qbox] (hybq) at (0,-2.2) {\textbf{Coarse prior needed}\\Ambiguity tolerance, but\\keep classical fine detail};
   \node[qbox] (qq) at (4.4,-2.2) {\textbf{Envelope descriptors}\\$S_q$ or $S_z$ matters more than\\the very lowest RMSE};
 
-  \node[mbox] (classic) at (-4.4,-5.0) {\textbf{Classical PSI}\\Default baseline\\Best fit for rougher classes: grinding, rough turning, milling finishing, wire EDM.};
-  \node[mbox] (hybrid) at (0,-5.0) {\textbf{Hybrid}\\Best nonclassical compromise\\Use when $S_a$ matters or when coincidence information should only stabilise unwrapping.};
-  \node[mbox] (quantum) at (4.4,-5.0) {\textbf{Quantum-like}\\Use selectively\\Most defensible on smoother finishing-style regimes and mainly for $S_q$/$S_z$.};
+  \node[mbox] (classic) at (-4.4,-5.0) {\textbf{Classical PSI}\\Baseline to validate first\\Best fit for rougher classes: grinding, rough turning, milling finishing, wire EDM.};
+  \node[mbox] (hybrid) at (0,-5.0) {\textbf{Hybrid}\\First nonclassical follow-up\\Use when $S_a$ matters or when coincidence information should only stabilise unwrapping.};
+  \node[mbox] (quantum) at (4.4,-5.0) {\textbf{Coincidence-proxy}\\Selective follow-up only\\Most defensible on smoother finishing-style regimes and mainly for $S_z$.};
 
-  \node[note] (fallback) at (0,-7.55) {If the regime is unclear, keep \textbf{classical} as the baseline and prefer \textbf{hybrid} over direct coincidence inversion.};
+  \node[note] (fallback) at (0,-7.55) {If the regime is unclear, validate \textbf{classical} first and treat \textbf{hybrid} as the next follow-up before direct coincidence inversion.};
 
   \draw[line] (start) -- (rmseq);
   \draw[line] (start) -- (hybq);

@@ -1,24 +1,24 @@
-% Narrative design-rule table distilled from the present benchmark
+% Narrative screening table distilled from the present benchmark
 \begin{table}[t]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.08}
-\caption{Regime-oriented method recommendation distilled from the measured-surface benchmark and the step-free optical-property sweep. The table is intentionally selective: it states where the present evidence supports each architecture and where it does not.}
+\caption{Regime-oriented screening hypotheses distilled from the measured-surface benchmark and the step-free optical-property sweep. The table is intentionally provisional: it states which architecture/endpoint combinations appear most worth independent follow-up and where the present evidence remains unsupportive.}
 \label{tab:regime_summary}
 \begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{2.6cm}>{\RaggedRight\arraybackslash}p{4.0cm}>{\RaggedRight\arraybackslash}p{2.5cm}>{\RaggedRight\arraybackslash}X}
 \toprule
-Target endpoint & Supported regime in the present data & Preferred method & Rationale from the benchmark \\
+Target endpoint & Supported regime in the present data & Follow-up priority & Rationale from the benchmark \\
 \midrule
-Lowest detrended height RMSE and finest texture fidelity & Step-free low-to-moderate roughness recovery; rougher measured classes; Al 7075, Brass, Graphite, Steel C45; turning (roughing), milling (finishing), wire-EDM & Classical PSI or H-noon2 & Classical PSI remains the pointwise baseline, and H-noon2 is effectively tied in the zero-step low-to-moderate regime because the final texture is still carried by the short-wavelength branch. \\
+Lowest detrended height RMSE and finest texture fidelity & Step-free low-to-moderate roughness recovery; rougher measured classes; Al 7075, Brass, Graphite, Steel C45; turning (roughing), milling (finishing), wire-EDM & Validate classical PSI and H-noon2 first & Classical PSI remains the pointwise baseline, and H-noon2 is effectively tied in the zero-step low-to-moderate regime because the final texture is still carried by the short-wavelength branch. \\
 
-Rougher high-return step-free roughness recovery & Step-free sweep at higher roughness with favourable optical return ($S_q\approx 80$--$120$~nm; high $R$, high $V_\mathrm{scale}$) & Q-noon2 or H-noon2 & In the synthetic high-return case the NOON-like branches become lower-RMSE than the classical baseline while still avoiding the severe texture loss seen in the long-$\Lambda$ difference channel. \\
+Rougher high-return step-free roughness recovery & Step-free sweep at higher roughness with favourable optical return ($S_q\approx 80$--$120$~nm; high $R$, high $V_\mathrm{scale}$) & Re-test Q-noon2 and H-noon2 under physical controls & In the synthetic high-return case the NOON-like branches become lower-RMSE than the classical baseline while still avoiding the severe texture loss seen in the long-$\Lambda$ difference channel. \\
 
-Ambiguity-tolerant measurement without losing short-wavelength detail & Cases where a coarse absolute-height prior is useful; nonclassical auxiliary channel acceptable; $S_a$ is the priority descriptor & Hybrid coarse-to-fine & The coincidence-derived channel stabilizes fringe-order selection, while the final map still inherits the fine texture from the short-wavelength classical branch. \\
+Ambiguity-tolerant measurement without losing short-wavelength detail & Cases where a coarse absolute-height prior is useful; nonclassical auxiliary channel acceptable; $S_a$ is the priority descriptor & Validate hybrid coarse-to-fine first & The coincidence-derived channel stabilizes fringe-order selection, while the final map still inherits the fine texture from the short-wavelength classical branch. \\
 
-Envelope-dominated roughness descriptors & Smoother finishing-style regimes; stainless steel 1.4301, Titanium; honed, burnished, glass-bead-blasted, and turning (finishing) surfaces; $S_q$ or $S_z$ more important than the absolute lowest RMSE & Direct quantum-like, selectively & The coincidence-like channel can retain broader excursions strongly enough to reduce $S_q$/$S_z$ bias in some smoother regimes, but it is not the preferred default for overall height accuracy. \\
+Envelope-dominated roughness descriptors & Smoother finishing-style regimes; stainless steel 1.4301, Titanium; honed, burnished, glass-bead-blasted, and turning (finishing) surfaces; $S_z$ more important than the absolute lowest RMSE & Test direct coincidence-proxy selectively & The coincidence-proxy channel can retain broader excursions strongly enough to reduce $S_z$ bias in some smoother regimes, but it is not the preferred default for overall height accuracy. \\
 
-Long synthetic-wavelength direct inversion as a primary estimator & Rough process classes or any regime demanding fine nm-scale texture fidelity & Not recommended as the default & The enlarged unambiguous range is bought at the cost of weaker texture sensitivity, which is why the strongest failures in the present study occur in the direct long-$\Lambda$ branch. \\
+Long synthetic-wavelength direct inversion as a primary estimator & Rough process classes or any regime demanding fine nm-scale texture fidelity & Low-priority follow-up only & The enlarged unambiguous range is bought at the cost of weaker texture sensitivity, which is why the strongest failures in the present study occur in the direct long-$\Lambda$ branch. \\
 \bottomrule
 \end{tabularx}
 \end{table}

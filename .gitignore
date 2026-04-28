@@ -39,9 +39,18 @@ Scopus - Scopus AI.pdf
 
 # Private submission/admin files kept local only
 private_submission/
+docs/gaps_to_publications.md
+docs/literature_map.md
+docs/mwtw2026_*.md
+docs/mwtw2026_assets/
+docs/new_findings.md
 docs/photonics_cover_letter_draft.md
+docs/project_notes.md
+docs/reviewer2_point_by_point_rebuttal.md
 docs/response_to_reviewers_draft.md
 docs/submission_snapshot_manifest.md
+manuscript/Abstract-Template-MwTW2026-kopia.docx
+manuscript/MwTW2026_*.docx
 manuscript/MwTW2026_Abstract_with_figures.tex
 
 # Generated outputs: keep only manuscript-facing paper artefacts

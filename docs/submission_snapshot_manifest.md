@@ -1,6 +1,6 @@
 # Submission Snapshot Manifest
 
-This repository-local manifest records the canonical scripts, inputs, output folders, existing public GitHub commit, Zenodo-enabled repository status, and archive-ready bundle used by the current manuscript snapshot. It improves traceability inside the working project tree; the GitHub commit is the current public code reference, and the enabled GitHub-Zenodo bridge can mint a DOI-bearing manuscript release once the final submission snapshot is released on GitHub.
+This repository-local manifest records the canonical scripts, inputs, output folders, public GitHub release, Zenodo DOI, and archive bundle used by the current manuscript snapshot. It improves traceability inside the working project tree; the GitHub release and Zenodo record are the current public code references for the manuscript-facing snapshot.
 
 ## Canonical Entry Points
 
@@ -38,9 +38,9 @@ This repository-local manifest records the canonical scripts, inputs, output fol
 ## Public Snapshot Policy
 
 - The normal Git-tracked repository snapshot contains the manuscript sources, simulation code, and manuscript-facing generated artefacts.
-- The submission-aligned public snapshot for the current manuscript corresponds to commit `708d8bb3610f` in `https://github.com/dawidkucharski/Quantum_interference`.
-- Zenodo archiving is enabled for the GitHub repository `dawidkucharski/Quantum_interference`; create a manuscript-specific GitHub release from the final submission snapshot to mint the DOI-bearing Zenodo record.
-- Insert the minted Zenodo DOI in the manuscript data-availability statement before journal submission.
+- The submission-aligned public snapshot for the current manuscript corresponds to GitHub release `submission-2026-04-28` at commit `922ef700940aba05cc2faf963e540add3ce5f100` in `https://github.com/dawidkucharski/Quantum_interference`.
+- Zenodo archived the release under version DOI `10.5281/zenodo.19844595` and concept DOI `10.5281/zenodo.19844594`.
+- GitHub release URL: `https://github.com/dawidkucharski/Quantum_interference/releases/tag/submission-2026-04-28`.
 - The full local `data/*.sur` set is excluded from normal Git history because the raw dataset is too large for a practical public GitHub snapshot.
 - Raw SUR inputs are available from the corresponding author upon reasonable request.
 
@@ -64,5 +64,5 @@ This repository-local manifest records the canonical scripts, inputs, output fol
 
 - The measured-benchmark workflow now also regenerates representative residual maps, a targeted resolution-sensitivity summary, an unwrap-control table, a full-dataset measured non-ideality control, and an approximate Gaussian roughness-filter sensitivity control.
 - Public development repository: `https://github.com/dawidkucharski/Quantum_interference`.
-- The repository may continue to evolve as the project and paper are revised; use commit `708d8bb3610f` for the manuscript-specific public code snapshot.
-- The local archive bundle mirrors the submission snapshot and can be attached to the Zenodo-backed GitHub release if a compact archive is preferred in addition to the release source archive.
+- The repository may continue to evolve as the project and paper are revised; use release `submission-2026-04-28` and commit `922ef700940aba05cc2faf963e540add3ce5f100` for the manuscript-specific public code snapshot.
+- The local archive bundle mirrors the earlier public snapshot; the Zenodo-backed GitHub release source archive is the DOI-bearing public archive for the current manuscript package.

@@ -2,9 +2,10 @@
 
 Release tag: `submission-2026-04-28-q1`
 Repository: `https://github.com/dawidkucharski/Quantum_interference`
+Zenodo version DOI: `https://doi.org/10.5281/zenodo.19852223`
 Zenodo concept DOI: `https://doi.org/10.5281/zenodo.19844594`
 
-The release tag is the authoritative pointer to the exact Git commit for this companion package. Zenodo assigns a version DOI per GitHub release under the stable concept DOI above.
+The release tag is the authoritative pointer to the exact Git commit for this companion package. The version DOI identifies this Q1 release, while the concept DOI identifies the continuing repository archive family.
 
 This companion package is intentionally derived-data only. It does not include the full native Mountains/DigitalSurf `.sur` files because those raw exports are too large for normal Git history and remain available from the corresponding author on reasonable request. Instead, it provides the benchmark-grid surfaces and CSV artefacts needed to audit the manuscript-facing simulation benchmark.
 

@@ -130,9 +130,10 @@ def _write_reproducibility_readme(path: Path, *, release_tag: str, concept_doi: 
 
 Release tag: `{release_tag}`
 Repository: `https://github.com/dawidkucharski/Quantum_interference`
+Zenodo version DOI: `https://doi.org/{version_doi}`
 Zenodo concept DOI: `https://doi.org/{concept_doi}`
 
-The release tag is the authoritative pointer to the exact Git commit for this companion package. Zenodo assigns a version DOI per GitHub release under the stable concept DOI above.
+The release tag is the authoritative pointer to the exact Git commit for this companion package. The version DOI identifies this Q1 release, while the concept DOI identifies the continuing repository archive family.
 
 This companion package is intentionally derived-data only. It does not include the full native Mountains/DigitalSurf `.sur` files because those raw exports are too large for normal Git history and remain available from the corresponding author on reasonable request. Instead, it provides the benchmark-grid surfaces and CSV artefacts needed to audit the manuscript-facing simulation benchmark.
 
@@ -337,7 +338,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Create Q1 reproducibility tables and release companion asset")
     parser.add_argument("--release-tag", default="submission-2026-04-28-q1")
     parser.add_argument("--concept-doi", default="10.5281/zenodo.19844594")
-    parser.add_argument("--version-doi", default="10.5281/zenodo.19844595")
+    parser.add_argument("--version-doi", default="10.5281/zenodo.19852223")
     parser.add_argument("--nx", type=int, default=256)
     parser.add_argument("--ny", type=int, default=256)
     args = parser.parse_args()

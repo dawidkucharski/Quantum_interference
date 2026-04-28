@@ -43,7 +43,7 @@ This repository-local manifest records the canonical scripts, inputs, output fol
 
 - The normal Git-tracked repository snapshot contains the manuscript sources, simulation code, and manuscript-facing generated artefacts.
 - The Q1 submission-aligned public snapshot for the current manuscript is fixed by GitHub release tag `submission-2026-04-28-q1` in `https://github.com/dawidkucharski/Quantum_interference`.
-- Zenodo archives repository releases under concept DOI `10.5281/zenodo.19844594`; each GitHub release receives its own version DOI under that concept record.
+- Zenodo archived the Q1 release under version DOI `10.5281/zenodo.19852223` and concept DOI `10.5281/zenodo.19844594`.
 - GitHub release URL: `https://github.com/dawidkucharski/Quantum_interference/releases/tag/submission-2026-04-28-q1`.
 - The full local `data/*.sur` set is excluded from normal Git history because the raw dataset is too large for a practical public GitHub snapshot.
 - The release companion archive supplies the derived 256 x 256 benchmark-grid surfaces used by the simulator, public CSV summaries, generated table sources, exact regeneration commands, and checksums.
@@ -64,7 +64,7 @@ This repository-local manifest records the canonical scripts, inputs, output fol
 - Generator: `scripts/make_q1_reproducibility_package.py`
 - Bundle: `outputs/submission_archive/quantum_interference_reproducibility_submission-2026-04-28-q1.tar.gz`
 - Checksum: `outputs/submission_archive/quantum_interference_reproducibility_submission-2026-04-28-q1.tar.gz.sha256`
-- SHA-256: `a667377f36eb48515c26502a4b141f3df5e167b80c4c8c14d9588fe72c5a4b49`
+- SHA-256: `cbe60dc49cbe5d8b6c7253a05e3118fde4e86420e9d180a28c37979ba37bc83f`
 - Contents: derived 256 x 256 benchmark-grid surfaces (`benchmark_grid_surfaces_256.npz`), benchmark-grid manifest, public CSV outputs, generated manuscript table sources, submission-support docs, exact regeneration commands, and Python environment summary. Raw native-resolution `data/*.sur` files are intentionally excluded.
 
 ## Legacy Local Bundle

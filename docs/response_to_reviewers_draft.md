@@ -1,8 +1,6 @@
 # Response to Reviewers Draft
 
-Replace any bracketed placeholders before submission.
-
-[Date]
+28 April 2026
 
 Dear Editor and Reviewers,
 
@@ -69,5 +67,5 @@ If helpful to the reviewers, a longer internal point-by-point version with exact
 Sincerely,
 
 Dawid Kucharski
-[Affiliation]
-[Email]
+Division of Metrology and Measurement Systems, Institute of Mechanical Technology, Faculty of Mechanical Engineering, Poznan University of Technology, 60-965 Poznan, Poland
+dawid.kucharski@put.poznan.pl

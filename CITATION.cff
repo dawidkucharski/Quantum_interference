@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this repository or its derived benchmark package, please cite it using the metadata below."
+title: "Simulation benchmark of hybrid coarse-to-fine interferometric profilometry using coincidence-proxy priors on measured rough surfaces"
+type: software
+authors:
+  - family-names: Kucharski
+    given-names: Dawid
+    affiliation: "Poznan University of Technology"
+version: "submission-2026-04-28-q1"
+date-released: "2026-04-28"
+repository-code: "https://github.com/dawidkucharski/Quantum_interference"
+url: "https://github.com/dawidkucharski/Quantum_interference/releases/tag/submission-2026-04-28-q1"
+abstract: >-
+  Public simulation and reproducibility package for a benchmark of classical phase-shifting interferometry, coincidence-proxy channels, and hybrid coarse-to-fine reconstruction on measured rough-surface topographies.
+keywords:
+  - interferometry
+  - surface profilometry
+  - phase-shifting interferometry
+  - coincidence-proxy interferometry
+  - roughness metrology
+  - reproducible research

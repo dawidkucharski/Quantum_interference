@@ -1,4 +1,4 @@
-# Quantum_interference Q1 Reproducibility Companion
+# Quantum_interference reproducibility companion
 
 Release tag: `submission-2026-04-28-q1`
 Repository: `https://github.com/dawidkucharski/Quantum_interference`
@@ -14,6 +14,7 @@ This companion package is intentionally derived-data only. It does not include t
 - `derived_csv/`: public CSV outputs copied from `outputs/paper_alicona_benchmark/`, including per-surface benchmark rows and control summaries.
 - `manuscript_tables/`: generated manuscript table sources used by the paper.
 - `support_docs/`: public experimental-validation protocol.
+- `CITATION.cff`: citation metadata for the public repository and companion package.
 - `commands.txt`: exact full-regeneration and smoke-test commands.
 - `environment.txt`: Python interpreter and package requirements used for this package.
 

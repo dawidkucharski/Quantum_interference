@@ -126,7 +126,7 @@ def _write_detector_parameter_table(path: Path) -> None:
 def _write_reproducibility_readme(path: Path, *, release_tag: str) -> None:
     python_version = sys.version.replace("\n", " ")
     requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8").strip()
-    text = f"""# Quantum_interference Q1 Reproducibility Companion
+    text = f"""# Quantum_interference reproducibility companion
 
 Release tag: `{release_tag}`
 Repository: `https://github.com/dawidkucharski/Quantum_interference`
@@ -142,6 +142,7 @@ This companion package is intentionally derived-data only. It does not include t
 - `derived_csv/`: public CSV outputs copied from `outputs/paper_alicona_benchmark/`, including per-surface benchmark rows and control summaries.
 - `manuscript_tables/`: generated manuscript table sources used by the paper.
 - `support_docs/`: public experimental-validation protocol.
+- `CITATION.cff`: citation metadata for the public repository and companion package.
 - `commands.txt`: exact full-regeneration and smoke-test commands.
 - `environment.txt`: Python interpreter and package requirements used for this package.
 
@@ -312,6 +313,10 @@ def _copy_public_outputs(asset_dir: Path) -> None:
         if source.exists():
             shutil.copy2(source, docs_root / doc_name)
 
+    citation = ROOT / "CITATION.cff"
+    if citation.exists():
+        shutil.copy2(citation, asset_dir / citation.name)
+
 
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -333,7 +338,7 @@ def _make_tarball(source_dir: Path, tar_path: Path) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Create Q1 reproducibility tables and release companion asset")
+    parser = argparse.ArgumentParser(description="Create reproducibility tables and release companion asset")
     parser.add_argument("--release-tag", default="submission-2026-04-28-q1")
     parser.add_argument("--nx", type=int, default=256)
     parser.add_argument("--ny", type=int, default=256)

@@ -15,8 +15,13 @@ This companion package is intentionally derived-data only. It does not include t
 - `manuscript_tables/`: generated manuscript table sources used by the paper.
 - `support_docs/`: public experimental-validation protocol.
 - `CITATION.cff`: citation metadata for the public repository and companion package.
+- `LICENSE`: split open-access license notice for code and public research artefacts.
 - `commands.txt`: exact full-regeneration and smoke-test commands.
 - `environment.txt`: Python interpreter and package requirements used for this package.
+
+## License
+
+Source code is distributed under the MIT License. Public documentation, figures, generated tables, public CSV summaries, and derived benchmark artefacts in this companion package are distributed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The native `.sur` files are not included in this public package and are not covered by the public repository license unless separately distributed with an explicit license notice.
 
 ## Full Regeneration Command
 

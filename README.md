@@ -5,6 +5,9 @@ The Git-tracked project snapshot is intended to contain the manuscript sources, 
 
 The raw measured Mountains/DigitalSurf `.sur` files are not included in the normal Git history because the full local dataset is too large for a practical public GitHub snapshot. Commands that reference `data/*.sur` therefore assume local access to those files. The raw SUR inputs can be shared by the corresponding author upon reasonable request.
 
+## License
+This open-access repository uses a split license: source code in `src/` and `scripts/` is released under the MIT License, while manuscript text, documentation, figures, generated tables, public CSV summaries, and derived benchmark artefacts are released under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The native `.sur` files are not part of the public Git release and are not covered by this repository license unless separately distributed with an explicit license notice. See `LICENSE` for details.
+
 ## Project aim (paper framing)
 We consider a **rough reflective surface** measured with:
 

@@ -1355,9 +1355,6 @@
 \newcommand{\entrylink}[1]{% For journal Encyclopedia
 \vspace{6pt}\noindent{\fontsize{9}{11.2}\selectfont\textbf{Entry Link:} {#1}\par}}
 
-\newcommand{\useofartificialintelligence}[1]{% For journal Nursing Reports
-\vspace{6pt}\noindent{\fontsize{9}{11.2}\selectfont\textbf{Use of Artificial Intelligence:} {#1}\par}}
-
 \newcommand{\reviewreports}[1]{%
 \vspace{6pt}\noindent{\fontsize{9}{11.2}\selectfont\textbf{Review Reports:} {#1}\par}}
 
